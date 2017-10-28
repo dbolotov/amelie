@@ -40,7 +40,7 @@ anode <- function(formula, data, val_data) {
 
 
   #optimize epsilon
-  epsilon <- get_epsilon(x_val_probs_prod,y_val) #should be on a cross-validation set, not on train set
+  epsilon <- op_epsilon(x_val_probs_prod,y_val) #should be on a cross-validation set, not on train set
 
 
   #compute predictions on training set

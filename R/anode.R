@@ -3,33 +3,50 @@
 #' @param formula An object of class "formula": a symbolic description of the
 #' model to be fitted.
 #' @param data a data frame containing the features (predictors) and target.
-#' Features are assumed to be continuous, and target is assumed to be either
-#' 0 or 1.
 #'
 #' @return An object of class \code{anode}:
 #'   \item{call}{The original call to \code{anode}.}
 #'   \item{epsilon}{The threshold value.}
 #'
 #' @details Details go here.
+#' Uses F1 score.
+#' Features are assumed to be continuous, and target is assumed to be either
+#' 0 or 1. NAs not supported.
 #' @examples
 #' # Examples go here.
+#'
+#'
 #' @export
-anode <- function(formula, data) {
+anode <- function(formula, data, val_data) {
 
-  feats <- data[,1:(dim(data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes target is last column
+  #val_data is validation set TEMPORARILY. should be created from data.
+
+  x <- data[,1:(dim(data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
+  y <- data[,dim(data)[2]]
+
+  x_val <- data[,1:(dim(val_data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
+  y_val <- data[,dim(val_data)[2]]
+
 
   #mean and variance
-  feats_mean <- apply(feats,2,mean)
-  feats_sd <- apply(feats,2,sd) #using sample standard deviation
+  x_mean <- apply(x,2,mean)
+  x_sd <- apply(x,2,sd) #using sample standard deviation
 
   #product of probabilities
-  feats_probs_prod <- rep(NA,nrow(feats))
-  for (r in 1:nrow(feats)) {
-    feats_probs_prod[r] <- prod(dnorm(as.numeric(feats[r,]), mean = feats_mean, sd = feats_sd, log = FALSE))
-  }
+  x_probs_prod <- univariate_gaussian(x,x_mean,x_sd)
+
+  x_val_probs_prod <- univariate_gaussian(x_val,x_mean,x_sd)
+
+
 
   #optimize epsilon
-  epsilon = 0.0001
+  epsilon <- get_epsilon(x_val_probs_prod,y_val) #should be on a cross-validation set, not on train set
+
+
+  #compute predictions on training set
+  train_preds <- x_probs_prod < epsilon
+
+  #compute train error rate
 
 
   # create the return object

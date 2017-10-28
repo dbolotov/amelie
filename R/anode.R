@@ -24,8 +24,8 @@ anode <- function(formula, data, val_data) {
   x <- data[,1:(dim(data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
   y <- data[,dim(data)[2]]
 
-  x_val <- data[,1:(dim(val_data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
-  y_val <- data[,dim(val_data)[2]]
+  x_val <- val_data[,1:(dim(val_data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
+  y_val <- val_data[,dim(val_data)[2]]
 
 
   #mean and variance
@@ -46,13 +46,14 @@ anode <- function(formula, data, val_data) {
   #compute predictions on training set
   train_preds <- x_probs_prod < epsilon
 
-  #compute train error rate
+  #compute train error rate?
 
 
   # create the return object
   call <- match.call()
   return_obj <- list(call = call,
-                     epsilon = epsilon)
+                     epsilon = epsilon,
+                     train_preds = train_preds)
   class(return_obj) <- "anode"
   return(return_obj)
 }

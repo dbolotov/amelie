@@ -26,22 +26,24 @@ op_epsilon <- function(p_val,y_val) {
   #p_val: probability values from validation set
   #y_val: target values from validation set
 
-  best_epsilon = 0
-  best_f1 = 0
-  f1 = 0
+  best_epsilon <- 0
+  best_f1 <- 0
+  f1 <- 0
 
-  stepsize <- (max(probs) - min(probs)) / 1000
+  stepsize <- (max(p_val) - min(p_val)) / 1000
 
-  for (epsilon in seq(min(probs),max(probs),stepsize)) {
-    predictions <- (p_val < epsilon)
-    f1 <- f1_score(predictions,yval)
+  for (epsilon in seq(min(p_val),max(p_val),stepsize)) {
+    predictions <- (p_val < epsilon) #? this makes it so predictions will be all 0 for 1st round of for loop
+    f1 <- f1_score(predictions,y_val)
+
+    if(is.nan(f1)){f1<-0} #matlab/octave implementation will return 0 if comparing Nan with a number. R will not.
 
     if (f1 > best_f1) {
       best_f1 <- f1
       best_epsilon <- epsilon
     }
   }
-  return(epsilon)
+  return(best_epsilon)
 }
 
 #

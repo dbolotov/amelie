@@ -15,11 +15,14 @@
 #' @examples
 #' # Examples go here.
 #'
+#'@importFrom stats sd
 #'
 #' @export
-anode <- function(formula, data, val_data) {
+anode <- function(formula, data) {
 
-  #val_data is validation set TEMPORARILY. should be created from data.
+  #val_data is validation set TEMPORARILY
+  val_data <- data[5:10,]
+  data <- data[1:4,]
 
   x <- data[,1:(dim(data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
   y <- data[,dim(data)[2]]
@@ -33,9 +36,9 @@ anode <- function(formula, data, val_data) {
   x_sd <- apply(x,2,sd) #using sample standard deviation
 
   #product of probabilities
-  x_probs_prod <- univariate_gaussian(x,x_mean,x_sd)
+  x_probs_prod <- .univariate_gaussian(x,x_mean,x_sd)
 
-  x_val_probs_prod <- univariate_gaussian(x_val,x_mean,x_sd)
+  x_val_probs_prod <- .univariate_gaussian(x_val,x_mean,x_sd)
 
 
 

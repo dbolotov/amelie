@@ -1,7 +1,8 @@
 #utility functions
 
-
-univariate_gaussian <- function(x,x_mean,x_sd) {
+#'@importFrom stats dnorm
+#'
+.univariate_gaussian <- function(x,x_mean,x_sd) {
   probs <- rep(NA,nrow(x))
   for (r in 1:nrow(x)) {
     probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))

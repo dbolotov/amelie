@@ -11,7 +11,7 @@
 }
 
 
-f1_score <- function(x,y) {
+.f1_score <- function(x,y) {
   #assumes that "1" is the positive result
   tp <- sum((x==1) & (y==1))
   fp <- sum((x==1) & (y==0))
@@ -21,7 +21,7 @@ f1_score <- function(x,y) {
   return(2*precision*recall/(precision+recall))
 }
 
-op_epsilon <- function(p_val,y_val) {
+.op_epsilon <- function(p_val,y_val) {
   #optimization as implemented in mlclass.org
 
   #p_val: probability values from validation set
@@ -35,7 +35,7 @@ op_epsilon <- function(p_val,y_val) {
 
   for (epsilon in seq(min(p_val),max(p_val),stepsize)) {
     predictions <- (p_val < epsilon) #? this makes it so predictions will be all 0 for 1st round of for loop
-    f1 <- f1_score(predictions,y_val)
+    f1 <- .f1_score(predictions,y_val)
 
     if(is.nan(f1)){f1<-0} #matlab/octave implementation will return 0 if comparing Nan with a number. R will not.
 

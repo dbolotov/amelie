@@ -20,6 +20,13 @@
 #' @export
 anode <- function(formula, data) {
 
+  # #assume formula & data frame
+  # m <- match.call(expand.dots = FALSE)
+  # target <- as.character(formula[[2]])
+  # print(m)
+
+
+
   #val_data is validation set TEMPORARILY
   val_data <- data[5:10,]
   data <- data[1:4,]
@@ -43,7 +50,7 @@ anode <- function(formula, data) {
 
 
   #optimize epsilon
-  epsilon <- op_epsilon(x_val_probs_prod,y_val) #should be on a cross-validation set, not on train set
+  epsilon <- .op_epsilon(x_val_probs_prod,y_val)
 
 
   #compute predictions on training set

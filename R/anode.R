@@ -18,18 +18,37 @@
 #'@importFrom stats sd
 #'
 #' @export
-anode <- function(formula, data) {
+anode.formula <- function(formula, full_data) {
+  call <- match.call()
+  if (!inherits(formula, "formula"))
+    stop("method is only for formula objects")
+  m <- match.call(expand.dots = FALSE)
+  if (identical(class(eval.parent(m$data)), "matrix"))
+    m$data <- as.data.frame(eval.parent(m$data))
+  # m$... <- NULL
+  m[[1L]] <- quote(stats::model.frame)
+  m <- eval(m, parent.frame())
+  Terms <- attr(m, "terms")
+  attr(Terms, "intercept") <- 0
+}
+
+
+
+#' @export
+anode <- function(formula, full_data) {
 
   # #assume formula & data frame
   # m <- match.call(expand.dots = FALSE)
   # target <- as.character(formula[[2]])
   # print(m)
 
+  #TEMPORARY: split full_data into data and val_data equally
+  split_point <- floor(nrow(full_data)/2)
+  data <- full_data[1:split_point,]
+  val_data <- full_data[(split_point+1):nrow(full_data),]
 
 
-  #val_data is validation set TEMPORARILY
-  val_data <- data[5:10,]
-  data <- data[1:4,]
+
 
   x <- data[,1:(dim(data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
   y <- data[,dim(data)[2]]

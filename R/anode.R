@@ -17,63 +17,71 @@
 #'
 #'@importFrom stats sd
 #'
-#' @export
-anode.formula <- function(formula, full_data) {
+#'@export
+anode <-
+  function (x, ...)
+    UseMethod ("anode")
+
+#'@export
+anode.formula <- function(formula, data, na.action = na.omit) {
   call <- match.call()
   if (!inherits(formula, "formula"))
     stop("method is only for formula objects")
   m <- match.call(expand.dots = FALSE)
   if (identical(class(eval.parent(m$data)), "matrix"))
     m$data <- as.data.frame(eval.parent(m$data))
-  # m$... <- NULL
+
   m[[1L]] <- quote(stats::model.frame)
+  m$na.action <- na.action
   m <- eval(m, parent.frame())
   Terms <- attr(m, "terms")
   attr(Terms, "intercept") <- 0
+
+  x <- model.matrix(Terms, m)
+  y <- model.extract(m, "response")
+  attr(x, "na.action") <- attr(y, "na.action") <- attr(m, "na.action")
+
+  ret <- anode.default(x, y, na.action = na.action)
+  ret$call <- call
+  ret$call[[1]] <- as.name("anode")
+  ret$terms <- Terms
+  if (!is.null(attr(m, "na.action")))
+    ret$na.action <- attr(m, "na.action")
+  class(ret) <- c("anode.formula", class(ret))
+  return (ret)
 }
 
 
 
+
 #' @export
-anode <- function(formula, full_data) {
+anode.default <- function(x, y, na.action = na.omit) {
 
-  # #assume formula & data frame
-  # m <- match.call(expand.dots = FALSE)
-  # target <- as.character(formula[[2]])
-  # print(m)
-
-  #TEMPORARY: split full_data into data and val_data equally
-  split_point <- floor(nrow(full_data)/2)
-  data <- full_data[1:split_point,]
-  val_data <- full_data[(split_point+1):nrow(full_data),]
-
-
-
-
-  x <- data[,1:(dim(data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
-  y <- data[,dim(data)[2]]
-
-  x_val <- val_data[,1:(dim(val_data)[2]-1)] #TEMPORARY IMPLEMENTATION; assumes y (target) is last column
-  y_val <- val_data[,dim(val_data)[2]]
+  #split data into train and validation sets
+  split_obj <- data_split(x,y)
+  train_x <- split_obj$train_x
+  train_y <- split_obj$train_y
+  val_x <- split_obj$val_x
+  val_y <- split_obj$val_y
 
 
   #mean and variance
-  x_mean <- apply(x,2,mean)
-  x_sd <- apply(x,2,sd) #using sample standard deviation
+  train_x_mean <- apply(train_x,2,mean)
+  train_x_sd <- apply(train_x,2,sd) #using sample standard deviation
 
   #product of probabilities
-  x_probs_prod <- .univariate_gaussian(x,x_mean,x_sd)
+  train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
 
-  x_val_probs_prod <- .univariate_gaussian(x_val,x_mean,x_sd)
+  val_x_probs_prod <- .univariate_gaussian(val_x,train_x_mean,train_x_sd)
 
 
 
   #optimize epsilon
-  epsilon <- .op_epsilon(x_val_probs_prod,y_val)
+  epsilon <- .op_epsilon(val_x_probs_prod,val_y)
 
 
   #compute predictions on training set
-  train_preds <- x_probs_prod < epsilon
+  train_preds <- train_x_probs_prod < epsilon
 
   #compute train error rate?
 
@@ -86,8 +94,6 @@ anode <- function(formula, full_data) {
   class(return_obj) <- "anode"
   return(return_obj)
 }
-
-
 
 
 

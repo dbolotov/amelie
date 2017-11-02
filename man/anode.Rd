@@ -4,7 +4,7 @@
 \alias{anode}
 \title{Anomaly Detection}
 \usage{
-anode(formula, data)
+anode(x, ...)
 }
 \arguments{
 \item{formula}{An object of class "formula": a symbolic description of the

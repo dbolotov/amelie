@@ -47,6 +47,37 @@
   return(best_epsilon)
 }
 
+.split_data <- function(x,y){
+
+
+  #randomly split data into train and val sets; ensure val set contains positive cases
+  split_index <- 0
+
+  #randomly split data into training and validation sets
+  # split_index <- sample.int(n = nrow(x), size = floor(.5*nrow(x)), replace = FALSE)
+
+  #non-randomly split data into training and validation sets
+  split_index <- c(1:(floor(nrow(x)/2)))
+
+  train_x <- x[split_index,]
+  train_y <- y[split_index]
+  val_x <- x[-split_index,]
+  val_y <- y[-split_index]
+
+  ret <- list(train_x,train_y,val_x,val_y)
+  names(ret) <- c("train_x","train_y","val_x","val_y")
+
+  return(ret)
+}
+
+
+
+
+
+
+
+
+
 #
 # #product of probabilities
 # x_probs_prod <- rep(NA,nrow(x))

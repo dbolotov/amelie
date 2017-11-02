@@ -9,17 +9,25 @@
 \usage{
 anode(x, ...)
 
-\method{anode}{formula}(formula, data, na.action = na.omit)
+\method{anode}{formula}(formula, data, na.action = na.omit, ...)
 
-\method{anode}{default}(x, y, na.action = na.omit)
+\method{anode}{default}(x, y, na.action = na.omit, ...)
 
 \method{print}{anode}(x, ...)
 }
 \arguments{
+\item{x}{TODO}
+
+\item{...}{additional arguments for \code{anode.default}.}
+
 \item{formula}{An object of class "formula": a symbolic description of the
 model to be fitted.}
 
 \item{data}{a data frame containing the features (predictors) and target.}
+
+\item{na.action}{TODO}
+
+\item{y}{TODO}
 }
 \value{
 An object of class \code{anode}:
@@ -28,11 +36,6 @@ An object of class \code{anode}:
 }
 \description{
 Anomaly Detection
-
-#'@export
-anode <-
-  function (x, ...)
-    UseMethod ("anode")
 }
 \details{
 Details go here.

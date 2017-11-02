@@ -1,6 +1,6 @@
 #utility functions
 
-#'@importFrom stats dnorm
+#'@importFrom stats dnorm na.omit model.extract model.matrix
 #'
 .univariate_gaussian <- function(x,x_mean,x_sd) {
   probs <- rep(NA,nrow(x))

@@ -3,6 +3,10 @@
 #' @param formula An object of class "formula": a symbolic description of the
 #' model to be fitted.
 #' @param data a data frame containing the features (predictors) and target.
+#' @param x TODO
+#' @param y TODO
+#' @param na.action TODO
+#' @param ... additional arguments for \code{anode.default}.
 #'
 #' @return An object of class \code{anode}:
 #'   \item{call}{The original call to \code{anode}.}
@@ -25,7 +29,7 @@ anode <- function(x, ...){
 
 #'@rdname anode
 #'@export
-anode.formula <- function(formula, data, na.action = na.omit) {
+anode.formula <- function(formula, data, na.action = na.omit, ...) {
   call <- match.call()
   if (!inherits(formula, "formula"))
     stop("method is only for formula objects")
@@ -57,10 +61,10 @@ anode.formula <- function(formula, data, na.action = na.omit) {
 
 #' @rdname anode
 #' @export
-anode.default <- function(x, y, na.action = na.omit) {
+anode.default <- function(x, y, na.action = na.omit, ...) {
 
   #split data into train and validation sets
-  split_obj <- data_split(x,y)
+  split_obj <- .split_data(x,y)
   train_x <- split_obj$train_x
   train_y <- split_obj$train_y
   val_x <- split_obj$val_x

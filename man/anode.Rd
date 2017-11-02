@@ -18,12 +18,12 @@ anode(x, ...)
 \arguments{
 \item{x}{TODO}
 
-\item{...}{additional arguments for \code{anode.default}.}
+\item{...}{Currently not used.}
 
 \item{formula}{An object of class "formula": a symbolic description of the
 model to be fitted.}
 
-\item{data}{a data frame containing the features (predictors) and target.}
+\item{data}{A data frame containing the features (predictors) and target.}
 
 \item{na.action}{TODO}
 
@@ -39,6 +39,9 @@ Anomaly Detection
 }
 \details{
 Details go here.
+
+Training set is used to compute mean and standard deviation. These statistics
+are then used to compute probabilities.
 Uses F1 score.
 Features are assumed to be continuous, and target is assumed to be either
 0 or 1. NAs not supported.

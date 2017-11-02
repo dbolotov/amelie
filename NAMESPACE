@@ -2,6 +2,7 @@
 
 S3method(anode,default)
 S3method(anode,formula)
+S3method(predict,anode)
 S3method(print,anode)
 export(anode)
 importFrom(stats,dnorm)

@@ -2,17 +2,20 @@
 #'
 #' @param formula An object of class "formula": a symbolic description of the
 #' model to be fitted.
-#' @param data a data frame containing the features (predictors) and target.
+#' @param data A data frame containing the features (predictors) and target.
 #' @param x TODO
 #' @param y TODO
 #' @param na.action TODO
-#' @param ... additional arguments for \code{anode.default}.
+#' @param ... Currently not used.
 #'
 #' @return An object of class \code{anode}:
 #'   \item{call}{The original call to \code{anode}.}
 #'   \item{epsilon}{The threshold value.}
 #'
 #' @details Details go here.
+#'
+#' Training set is used to compute mean and standard deviation. These statistics
+#' are then used to compute probabilities.
 #' Uses F1 score.
 #' Features are assumed to be continuous, and target is assumed to be either
 #' 0 or 1. NAs not supported.
@@ -86,8 +89,8 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
   epsilon <- .op_epsilon(val_x_probs_prod,val_y)
 
 
-  #compute predictions on training set
-  train_preds <- train_x_probs_prod < epsilon
+  #compute predictions on training set?
+  # predicted <- as.numeric(train_x_probs_prod < epsilon)
 
   #compute train error rate?
 
@@ -95,8 +98,7 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
   # create the return object
   call <- match.call()
   return_obj <- list(call = call,
-                     epsilon = epsilon,
-                     train_preds = train_preds)
+                     epsilon = epsilon)
   class(return_obj) <- "anode"
   return(return_obj)
 }
@@ -107,5 +109,7 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
 print.anode <- function(x, ...) {
   cat("Call:\n")
   print(x$call)
+  cat("\n")
+  cat("epsilon: ",x$epsilon,sep="")
 }
 

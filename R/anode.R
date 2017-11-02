@@ -16,12 +16,14 @@
 #' # Examples go here.
 #'
 #'@importFrom stats sd
-#'
-#'@export
-anode <-
-  function (x, ...)
-    UseMethod ("anode")
 
+
+#'@export
+anode <- function(x, ...){
+  UseMethod("anode")
+}
+
+#'@rdname anode
 #'@export
 anode.formula <- function(formula, data, na.action = na.omit) {
   call <- match.call()
@@ -53,7 +55,7 @@ anode.formula <- function(formula, data, na.action = na.omit) {
 
 
 
-
+#' @rdname anode
 #' @export
 anode.default <- function(x, y, na.action = na.omit) {
 
@@ -96,9 +98,7 @@ anode.default <- function(x, y, na.action = na.omit) {
 }
 
 
-
-
-
+#' @rdname anode
 #' @export
 print.anode <- function(x, ...) {
   cat("Call:\n")

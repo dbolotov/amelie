@@ -2,9 +2,18 @@
 % Please edit documentation in R/anode.R
 \name{anode}
 \alias{anode}
+\alias{anode.formula}
+\alias{anode.default}
+\alias{print.anode}
 \title{Anomaly Detection}
 \usage{
 anode(x, ...)
+
+\method{anode}{formula}(formula, data, na.action = na.omit)
+
+\method{anode}{default}(x, y, na.action = na.omit)
+
+\method{print}{anode}(x, ...)
 }
 \arguments{
 \item{formula}{An object of class "formula": a symbolic description of the
@@ -19,6 +28,11 @@ An object of class \code{anode}:
 }
 \description{
 Anomaly Detection
+
+#'@export
+anode <-
+  function (x, ...)
+    UseMethod ("anode")
 }
 \details{
 Details go here.

@@ -43,7 +43,7 @@ predict.anode <- function(object, newdata, na.action, ...) {
   #prediction
   newdata_probs_prod <- .univariate_gaussian(x,train_x_mean,train_x_sd)
 
-  predictions <- (newdata_probs_prod < epsilon)
+  predictions <- as.numeric(newdata_probs_prod < epsilon)
 
   return(predictions)
 }

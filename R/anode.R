@@ -98,7 +98,9 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
   # create the return object
   call <- match.call()
   return_obj <- list(call = call,
-                     epsilon = epsilon)
+                     epsilon = epsilon,
+                     train_x_mean = train_x_mean,
+                     train_x_sd = train_x_sd)
   class(return_obj) <- "anode"
   return(return_obj)
 }

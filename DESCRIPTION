@@ -2,11 +2,10 @@ Package: anode
 Type: Package
 Title: Anomaly Detection with Gaussian Probability Functions
 Version: 0.1.0
-Authors@R: c(person("Dmitriy", "Bolotov", email = "dmitriy.bolotov@softwareag.com", role = c("aut", "cre")))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(person("Dmitriy", "Bolotov", email = "dmitriy.bolotov@gmail.com", role = c("aut", "cre")))
+Description: Anomaly detection with Gaussian probability functions.
 Imports: stats
-License: GPL (>= 2.1)
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat

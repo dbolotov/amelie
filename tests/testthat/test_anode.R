@@ -1,5 +1,8 @@
 context("anode object")
 
+
+#dummy tests
+
 test_that("fail when x is not matrix", {
   expect_equal(10, 10)
 })

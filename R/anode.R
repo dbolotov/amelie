@@ -1,4 +1,4 @@
-#' \code{anode} implements supervised anomaly detection with normal probability
+#' anode: supervised anomaly detection with normal probability
 #' functions.
 #'
 #' @param formula An object of class "formula": a symbolic description of the
@@ -17,7 +17,7 @@
 #'
 #' @details Details go here.
 #'
-#' \{anode} implements anomaly detection as described in the Coursera Machine
+#' \code{anode} implements anomaly detection as described in the Coursera Machine
 #' Learning course.
 #'
 #' The approach is set up as a binary classification problem. Features are

@@ -1,11 +1,14 @@
-#' Anomaly Detection
+#' \code{anode} implements supervised anomaly detection with normal probability
+#' functions.
 #'
 #' @param formula An object of class "formula": a symbolic description of the
 #' model to be fitted.
 #' @param data A data frame containing the features (predictors) and target.
-#' @param x TODO
-#' @param y TODO
-#' @param na.action TODO
+#' @param x A matrix of numeric features.
+#' @param y A matrix of numeric predicted values, either 0 or 1, with 1
+#' assumed to be anomalous.
+#' @param na.action A function specifying the action to be taken if NAs are
+#' found.
 #' @param ... Currently not used.
 #'
 #' @return An object of class \code{anode}:
@@ -14,11 +17,17 @@
 #'
 #' @details Details go here.
 #'
-#' Training set is used to compute mean and standard deviation. These statistics
-#' are then used to compute probabilities.
-#' Uses F1 score.
-#' Features are assumed to be continuous, and target is assumed to be either
-#' 0 or 1. NAs not supported.
+#' \{anode} implements anomaly detection as described in the Coursera Machine
+#' Learning course.
+#'
+#' The approach is set up as a binary classification problem. Features are
+#' assumed to be continuous, and the target is assumed to take on values of 0
+#' (negative case, no anomaly) or 1 (positive case, anomaly).
+#'
+#' The threshold \code{epsilon} is optimized using the F1 score.
+#'
+#' NAs are supported in the following way: TODO EXPLANATION.
+#'
 #' @examples
 #' # Examples go here.
 #'

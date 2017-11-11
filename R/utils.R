@@ -11,11 +11,11 @@
 }
 
 
-.f1_score <- function(x,y) {
+.f1_score <- function(y_hat,y) {
   #assumes that "1" is the positive result
-  tp <- sum((x==1) & (y==1))
-  fp <- sum((x==1) & (y==0))
-  fn <- sum((x==0) & (y==1))
+  tp <- sum((y_hat==1) & (y==1))
+  fp <- sum((y_hat==1) & (y==0))
+  fn <- sum((y_hat==0) & (y==1))
   precision <- tp / (tp + fp)
   recall <- tp / (tp + fn)
   return(2*precision*recall/(precision+recall))

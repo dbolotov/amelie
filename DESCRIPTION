@@ -1,9 +1,9 @@
 Package: anode
 Type: Package
-Title: Anomaly Detection with Gaussian Probability Functions
-Version: 0.1.0
+Title: Anomaly Detection with Normal Probability Functions
+Version: 0.0.0.9000
 Authors@R: c(person("Dmitriy", "Bolotov", email = "dmitriy.bolotov@gmail.com", role = c("aut", "cre")))
-Description: Anomaly detection with Gaussian probability functions.
+Description: Anomaly detection with normal probability functions.
 Imports: stats
 License: GPL (>= 3)
 Encoding: UTF-8

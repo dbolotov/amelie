@@ -1,0 +1,77 @@
+---
+title: "Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+### Introduction
+
+This vignette describes the anomaly detection algorithm and provides some examples.
+
+
+### Description
+
+This is a binary classification problem
+
+Given an observation $x$ consisting of features $\{x_1, ..., x_n\}$, compute the probability density $p(x)$ of the features. If the $p(x) < \epsilon$, where $\epsilon$ is a tuned parameter, flag the observation as anomalous.
+
+### Concepts
+
+#### Normal (Gaussian) distribution
+
+This algorithm assumes that each of the features $x_i$ is normally distributed with mean $\mu_i$ and variance $\sigma_i^2$: $x_i \sim \mathcal{N}(\mu_i,\sigma_i^2)$. 
+
+For a variable with mean $\mu$ and variance $\sigma^2$, the probability density of the normal distribution is given by: 
+
+$$p(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+	
+
+#### Parameter estimation
+
+The normal distribution is parametrized by mean $\mu$ and variance $\sigma^2$. For a data set $\{x_1,x_2, ..., x_m\}$, the parameters are estimated using the following:
+
+$$\mu = \frac{1}{m}\sum_{i=1}^{m}x_i$$
+$$\sigma^2 = \frac{1}{m}\sum_{i=1}^{m}(x_i-\mu)^2$$
+
+
+#### Density estimation
+
+The joint probability is calculated under the assumptions that features are independent of each other, and each feature is normally distributed. For a set of observations $\{x_1,x_2, ..., x_m\}$ where each observation $x_i \in R^n$: 
+
+$$p(x) = \prod_{j=1}^{n}p(x_j;\mu_j,\sigma_j^2)$$
+
+### Algorithm
+
+Using the above assumptions and definitions, the algorithm is implemented as follows:
+
+1. Given a data set $(x,y)$, split it into training and cross validation sets, $\{x^{(1)},...,x^{(m)}\}$ and $\{(x_{cv}^{(1)},y_{cv}^{(1)}), ..., (x_{cv}^{(k)},y_{cv}^{(k)})\}$.
+    - Training set is not required to have any positive (anomalous) examples.
+    - It is also a good idea to set aside a test data set for final evaluation.
+2. Fit model $p(x)_{train}$ on training set.
+    a. Fit parameters $\mu$ and $\sigma^2$ for each feature.
+    b. Calculate $p(x)_{train}$ for each row in train set.
+3. Tune $\epsilon$ on cross-validation data set.
+    a. Pick starting value for $\epsilon$.
+    b. Calculate $p(x)_{cv}$ for each row in CV set using $\mu$ and $\sigma^2$ from `step 2`.
+    c. For each row $i$ in CV set, predict $y = 1$ if $p(x_i) < \epsilon$ (anomaly), else predict $y=0$.
+    d. Evaluate prediction accuracy on CV set using F1 score.
+    e. Update $\epsilon$ if F1 score improves. 
+    f. Stop when best $\epsilon$ value is found.
+4. Evaluate algorithm accuracy on the training set.
+    - Use $p(x)_{train}$ from `step 2` and $\epsilon$ from `step 3`.
+5. After training, evaluate algorithm accuracy on a separate test set.
+    - Compute $p(x_i)_{test}$ using $\mu$ and $\sigma^2$ from `step 2` and $\epsilon$ from `step 3`.
+
+### In practice
+
+#### When to use an anomaly detection algorithm - TODO
+
+#### How to split data for this algorithm - TODO
+
+#### Feature standardization - TODO
+
+### Examples - TODO
+

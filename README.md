@@ -5,7 +5,7 @@
 About
 -----
 
-anode implements anomaly detection with Gaussian probability functions. The algorithm is described in the Stanford ML course, [mlclass.org](mlclass.org).
+anode implements anomaly detection with Gaussian probability functions, as described in the Coursera [Machine Learning Course](https://www.coursera.org/learn/machine-learning).
 
 Installation
 ------------

@@ -38,6 +38,24 @@ test_that("fit is exactly the same for formula and matrix data",{
   expect_false(identical(df_fit$call,mat_fit$call))
 })
 
+
+test_that("fit object contains required attributes", {
+  set.seed(234)
+  x1 <- c(0,.2,3,1,4,.9,-2,-1)
+  x2 <- c(0,.5,1,2.4,1.0,1,-.3,-.1)
+  x <- do.call(cbind,list(x1,x2))
+  y <- c(0,0,0,0,0,0,1,1)
+  dframe <- data.frame(x,y)
+  df_fit <- anode(y ~ x1 + x2, dframe)
+  mat_fit <- anode(x = x, y = y)
+
+  expect_equal(attributes(df_fit)$names,c("call","epsilon","train_x_mean",
+                                          "train_x_sd","train_predictions",
+                                          "terms"))
+  expect_equal(attributes(mat_fit)$names,c("call","epsilon","train_x_mean",
+                                           "train_x_sd","train_predictions"))
+})
+
 # test_that("fit object is printed with call and epsilon",{
 #   set.seed(321)
 #   x1 <- c(0,.2,3,1,1,-.8,-2,-1)
@@ -59,6 +77,13 @@ test_that("fit is exactly the same for formula and matrix data",{
 
 #dummy tests
 
+test_that("fail when x and y do not have same number of observations", {
+  expect_equal(0,0)
+})
+
+test_that("fail when x does not have at least 1 row for each class", {
+  expect_equal(10, 10)
+})
 
 test_that("fail when x is not numeric", {
   expect_equal(10, 10)

@@ -84,8 +84,8 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
 
 
   #mean and variance
-  train_x_mean <- apply(train_x,2,mean)
-  train_x_sd <- apply(train_x,2,sd) #using sample standard deviation
+  train_x_mean <- unname(apply(train_x,2,mean))
+  train_x_sd <- unname(apply(train_x,2,sd)) #using sample standard deviation
 
   #product of probabilities
   train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
@@ -99,7 +99,7 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
 
 
   #compute predictions on training set?
-  # predicted <- as.numeric(train_x_probs_prod < epsilon)
+  train_predictions <- as.numeric(train_x_probs_prod < epsilon)
 
   #compute train error rate?
 
@@ -109,7 +109,8 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
   return_obj <- list(call = call,
                      epsilon = epsilon,
                      train_x_mean = train_x_mean,
-                     train_x_sd = train_x_sd)
+                     train_x_sd = train_x_sd,
+                     train_predictions = train_predictions)
   class(return_obj) <- "anode"
   return(return_obj)
 }

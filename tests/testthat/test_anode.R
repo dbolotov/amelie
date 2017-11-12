@@ -1,6 +1,9 @@
 context("anode object")
 
 
+test_that("class of fit object is of specific type", {
+})
+
 test_that("class of fit object excludes formula when using default notation",{
   set.seed(1234)
   x1 <- c(1,.2,3,1,1,.7,-2,-1)
@@ -12,6 +15,9 @@ test_that("class of fit object excludes formula when using default notation",{
   mat_fit <- anode(x = x, y = y)
   expect_identical(class(df_fit),c("anode.formula","anode"))
   expect_identical(class(mat_fit),c("anode"))
+  expect_is(df_fit,c("anode"))
+  expect_is(df_fit,c("anode.formula")) #check inheritance
+  expect_is(mat_fit,c("anode")) #check inheritance
 })
 
 
@@ -31,6 +37,25 @@ test_that("fit is exactly the same for formula and matrix data",{
   expect_identical(df_fit$train_predictions,mat_fit$train_predictions)
   expect_false(identical(df_fit$call,mat_fit$call))
 })
+
+# test_that("fit object is printed with call and epsilon",{
+#   set.seed(321)
+#   x1 <- c(0,.2,3,1,1,-.8,-2,-1)
+#   x2 <- c(1,.2,0.4,-3,0,-1,-.3,-.1)
+#   x <- do.call(cbind,list(x1,x2))
+#   y <- c(0,0,0,0,0,1,1,1)
+#   dframe <- data.frame(x,y)
+#   df_fit <- anode(y ~ x1 + x2, dframe)
+#   mat_fit <- anode(x = x, y = y)
+#
+#   expect_output(print(df_fit),"Call:
+# anode(formula = y ~ x1 + x2, data = dframe)
+#
+# epsilon: 0.02435071")
+# })
+
+
+
 
 #dummy tests
 

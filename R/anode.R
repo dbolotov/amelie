@@ -87,6 +87,9 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
   train_x_mean <- unname(apply(train_x,2,mean))
   train_x_sd <- unname(apply(train_x,2,sd)) #using sample standard deviation
 
+  train_x_mean <- .mean2(train_x)
+  train_x_sd <- .sd2(train_x) #using sample standard deviation
+
   #product of probabilities
   train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
 

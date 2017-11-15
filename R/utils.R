@@ -80,7 +80,13 @@
   return(ret)
 }
 
+.mean2 <- function(x) {
+  return(unname(apply(x,2,mean)))
+}
 
+.sd2 <- function(x) {
+  return(unname(apply(x,2,sd)))
+}
 
 
 

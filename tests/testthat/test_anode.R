@@ -1,9 +1,6 @@
 context("anode object")
 
 
-test_that("class of fit object is of specific type", {
-})
-
 test_that("class of fit object excludes formula when using default notation",{
   set.seed(1234)
   x1 <- c(1,.2,3,1,1,.7,-2,-1)
@@ -78,10 +75,11 @@ test_that("fit object contains required attributes", {
 #dummy tests
 
 test_that("fail when x and y do not have same number of observations", {
+  #account for x possibly being a 1-d array
   expect_equal(0,0)
 })
 
-test_that("fail when x does not have at least 1 row for each class", {
+test_that("fail when x does not have at least 2 rows for each class", {
   expect_equal(10, 10)
 })
 

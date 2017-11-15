@@ -59,14 +59,14 @@ anode.formula <- function(formula, data, na.action = na.omit, ...) {
   y <- model.extract(m, "response")
   attr(x, "na.action") <- attr(y, "na.action") <- attr(m, "na.action")
 
-  ret <- anode.default(x, y, na.action = na.action)
-  ret$call <- call
-  ret$call[[1]] <- as.name("anode")
-  ret$terms <- Terms
+  return_object <- anode.default(x, y, na.action = na.action)
+  return_object$call <- call
+  return_object$call[[1]] <- as.name("anode")
+  return_object$terms <- Terms
   if (!is.null(attr(m, "na.action")))
-    ret$na.action <- attr(m, "na.action")
-  class(ret) <- c("anode.formula", class(ret))
-  return (ret)
+    return_object$na.action <- attr(m, "na.action")
+  class(return_object) <- c("anode.formula", class(return_object))
+  return (return_object)
 }
 
 

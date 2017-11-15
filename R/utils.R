@@ -3,22 +3,12 @@
 #'@importFrom stats dnorm na.omit model.extract model.matrix
 
 .univariate_gaussian <- function(x,x_mean,x_sd) {
-  #x can be 1 row, and 1 column
   probs <- rep(NA,nrow(x))
   for (r in 1:nrow(x)) {
     probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
   }
   return(probs)
 }
-
-# .univariate_gaussian <- function(x,x_mean,x_sd) {
-#   #x can be 1 row, and 1 column
-#   probs <- rep(NA,nrow(x))
-#   for (r in 1:nrow(x)) {
-#     probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
-#   }
-#   return(probs)
-# }
 
 
 .f1_score <- function(y_hat,y) {

@@ -72,7 +72,7 @@ test_that("fit object contains required attributes", {
 
 
 
-#dummy tests
+#TODO tests
 
 test_that("fail when x and y do not have same number of observations", {
   #account for x possibly being a 1-d array

@@ -85,23 +85,20 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
 
   #mean and variance
   train_x_mean <- .mean2(train_x)
-  train_x_sd <- .sd2(train_x) #using sample standard deviation
+  train_x_sd <- .sd2(train_x)
 
   #product of probabilities
   train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
-
   val_x_probs_prod <- .univariate_gaussian(val_x,train_x_mean,train_x_sd)
-
-
 
   #optimize epsilon
   epsilon <- .op_epsilon(val_x_probs_prod,val_y)
 
+  #compute predictions on training set
+  val_predictions <- as.numeric(val_x_probs_prod < epsilon)
 
-  #compute predictions on training set?
-  train_predictions <- as.numeric(train_x_probs_prod < epsilon)
-
-  #compute train error rate?
+  #compute train f1 score
+  val_score <- .f1_score(val_predictions, val_y)
 
 
   # create the return object
@@ -110,7 +107,8 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
                      epsilon = epsilon,
                      train_x_mean = train_x_mean,
                      train_x_sd = train_x_sd,
-                     train_predictions = train_predictions)
+                     val_predictions = val_predictions,
+                     val_score = val_score)
   class(return_obj) <- "anode"
   return(return_obj)
 }

@@ -75,6 +75,7 @@
 }
 
 .sd2 <- function(x) {
+  #using sample standard deviation
   return(unname(apply(x,2,sd)))
 }
 

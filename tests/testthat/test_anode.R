@@ -46,11 +46,12 @@ test_that("fit object contains required attributes", {
   df_fit <- anode(y ~ x1 + x2, dframe)
   mat_fit <- anode(x = x, y = y)
 
-  expect_equal(attributes(df_fit)$names,c("call","epsilon","train_x_mean",
-                                          "train_x_sd","train_predictions",
-                                          "terms"))
-  expect_equal(attributes(mat_fit)$names,c("call","epsilon","train_x_mean",
-                                           "train_x_sd","train_predictions"))
+  expect_equal(attributes(df_fit)$names,c("call", "epsilon", "train_x_mean",
+                                          "train_x_sd", "val_predictions",
+                                          "val_score", "terms"))
+  expect_equal(attributes(mat_fit)$names,c("call", "epsilon", "train_x_mean",
+                                           "train_x_sd","val_predictions",
+                                           "val_score"))
 })
 
 # test_that("fit object is printed with call and epsilon",{

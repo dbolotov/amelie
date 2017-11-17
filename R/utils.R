@@ -57,9 +57,10 @@
   #separate into two sets, negatives and posives
   #move all postives to val, 1/3 of negatives to val, and 2/3 of the negatives to train
   #shuffle val
-
+  print(random)
   if (random==TRUE) {
     full_shuffle_index <- sample(1:length(y))
+    print(full_shuffle_index)
     x <- x[full_shuffle_index,]
     y <- y[full_shuffle_index]
 
@@ -75,17 +76,13 @@
 
     val_x <- neg_x[(split_point+1):(length(y)-length(pos_index)),]
     val_x <- rbind(val_x,pos_x)
-    val_y <- c(rep(0,length((split_point+1):(length(y)-length(pos_index)))),rep(1,length(pos_index))) #fix this
+    val_y <- c(rep(0,length((split_point+1):(length(y)-length(pos_index)))),
+               rep(1,length(pos_index))) #combine negative and positive observations
   }
 
-  if (random==FALSE) {
-    #randomly split data into train and val sets; ensure val set contains positive cases
-    split_index <- 0
-
-    #randomly split data into training and validation sets
-    # split_index <- sample.int(n = nrow(x), size = floor(.5*nrow(x)), replace = FALSE)
-
+  else if (random==FALSE) {
     #non-randomly split data into training and validation sets
+
     split_index <- c(1:(floor(nrow(x)/2)))
 
     train_x <- x[split_index,]
@@ -95,7 +92,7 @@
   }
 
   else {
-    stop("random must be TRUE or FALSE")
+    stop("random must be logical TRUE or FALSE")
   }
 
   ret <- list(train_x,train_y,val_x,val_y)
@@ -126,3 +123,6 @@
 #   x_probs_prod[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
 # }
 #
+#randomly split data into training and validation sets
+# split_index <- sample.int(n = nrow(x), size = floor(.5*nrow(x)), replace = FALSE)
+

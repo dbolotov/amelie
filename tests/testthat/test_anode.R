@@ -87,6 +87,19 @@ test_that("fail when y has anything other than 0 and 1", {
 })
 
 
+test_that("NAs are treated correctly", {
+  x1 <- c(1,NA,3,1,4,.9,-2,-1)
+  x2 <- c(0,.5,1,2.4,1.0,1,-.3,-.1)
+  x <- do.call(cbind,list(x1,x2))
+  y <- c(0,0,0,0,0,0,1,1)
+  dframe <- data.frame(x,y)
+  set.seed(142)
+  df_fit <- anode(y ~ x1 + x2, dframe)
+  expect_equal(df_fit$train_x_mean,c(1.966667,1.466667), tolerance = 0.00001)
+  expect_equal(df_fit$epsilon,0.004203277)
+})
+
+
 #test not working properly
 # test_that("fit object is printed with call and epsilon",{
 #   set.seed(321)

@@ -17,7 +17,7 @@
 #'
 #' @details Details go here.
 #'
-#' \code{anode} implements anomaly detection as described in the Coursera Machine
+#' \code{anode} implements anomaly detection as described in Andrew Ng's Machine
 #' Learning course.
 #'
 #' The approach is set up as a binary classification problem. Features are
@@ -25,8 +25,6 @@
 #' (negative case, no anomaly) or 1 (positive case, anomaly).
 #'
 #' The threshold \code{epsilon} is optimized using the F1 score.
-#'
-#' NAs are supported in the following way: TODO EXPLANATION.
 #'
 #' @examples
 #' # Examples go here.

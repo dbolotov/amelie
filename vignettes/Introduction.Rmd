@@ -65,16 +65,6 @@ Using the above assumptions and definitions, the algorithm is implemented as fol
 5. After training, evaluate algorithm accuracy on a separate test set.
     - Compute $p(x_i)_{test}$ using $\mu$ and $\sigma^2$ from `step 2` and $\epsilon$ from `step 3`.
 
-### In practice
-
-These tips are taken from the ML course, and are suggestions for using this particular approach.
-
-#### When to use an anomaly detection algorithm - TODO
-
-#### How to split data for this algorithm - TODO
-
-#### Feature standardization - TODO
-
 ### Examples - TODO
 
 ### References

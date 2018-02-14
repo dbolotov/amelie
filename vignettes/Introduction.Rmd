@@ -14,9 +14,9 @@ This vignette describes the anomaly detection algorithm and provides some exampl
 
 ### Description
 
-This is a binary classification problem
+The anomaly detection problem is set up here as a binary classification task, where each observation $x$ is classified as anomalous (class `1`) or non-anomalous (class `0`). We assume that anomalies are much less frequent than normal observations.
 
-Given an observation $x$ consisting of features $\{x_1, ..., x_n\}$, compute the probability density $p(x)$ of the features. If the $p(x) < \epsilon$, where $\epsilon$ is a tuned parameter, flag the observation as anomalous.
+The scoring method is as follows. Given an observation $x$ consisting of features $\{x_1, ..., x_n\}$, compute the probability density $p(x)$ of the features. If the $p(x) < \epsilon$, where $\epsilon$ is a tuned parameter, the observation is classified as anomalous.
 
 ### Concepts
 
@@ -47,12 +47,12 @@ $$p(x) = \prod_{j=1}^{n}p(x_j;\mu_j,\sigma_j^2)$$
 
 Using the above assumptions and definitions, the algorithm is implemented as follows:
 
-1. Given a data set $(x,y)$, split it into training and cross validation sets, $\{x^{(1)},...,x^{(m)}\}$ and $\{(x_{cv}^{(1)},y_{cv}^{(1)}), ..., (x_{cv}^{(k)},y_{cv}^{(k)})\}$.
+1. Given a data set $(x,y)$, split it into training and cross-validation sets, $\{x^{(1)},...,x^{(m)}\}$ and $\{(x_{cv}^{(1)},y_{cv}^{(1)}), ..., (x_{cv}^{(k)},y_{cv}^{(k)})\}$.
     - Training set is not required to have any positive (anomalous) examples.
-    - It is also a good idea to set aside a test data set for final evaluation.
+    - It is a good idea to set aside a separate test data set before the call to `anode`, for final evaluation.
 2. Fit model $p(x)_{train}$ on training set.
     a. Fit parameters $\mu$ and $\sigma^2$ for each feature.
-    b. Calculate $p(x)_{train}$ for each row in train set.
+    b. Calculate $p(x)_{train}$ for each row in training set.
 3. Tune $\epsilon$ on cross-validation data set.
     a. Pick starting value for $\epsilon$.
     b. Calculate $p(x)_{cv}$ for each row in CV set using $\mu$ and $\sigma^2$ from `step 2`.
@@ -67,6 +67,8 @@ Using the above assumptions and definitions, the algorithm is implemented as fol
 
 ### In practice
 
+These tips are taken from the ML course, and are suggestions for using this particular approach.
+
 #### When to use an anomaly detection algorithm - TODO
 
 #### How to split data for this algorithm - TODO
@@ -74,4 +76,8 @@ Using the above assumptions and definitions, the algorithm is implemented as fol
 #### Feature standardization - TODO
 
 ### Examples - TODO
+
+### References
+
+[Machine Learning Course](https://www.coursera.org/learn/machine-learning) - the package is based on anomaly detection lectures from Andrew Ng's Machine Learning course.
 

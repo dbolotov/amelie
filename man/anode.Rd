@@ -29,7 +29,7 @@ model to be fitted.}
 \item{na.action}{A function specifying the action to be taken if NAs are
 found.}
 
-\item{y}{A matrix of numeric predicted values, either 0 or 1, with 1
+\item{y}{A vector of numeric target values, either 0 or 1, with 1
 assumed to be anomalous.}
 }
 \value{
@@ -42,20 +42,18 @@ anode: supervised anomaly detection with normal probability
 functions.
 }
 \details{
-Details go here.
-
-\code{anode} implements anomaly detection as described in the Coursera Machine
+\code{anode} implements anomaly detection as described in Andrew Ng's Machine
 Learning course.
 
-The approach is set up as a binary classification problem. Features are
-assumed to be continuous, and the target is assumed to take on values of 0
-(negative case, no anomaly) or 1 (positive case, anomaly).
+Features are assumed to be continuous, and the target is assumed to take
+on values of 0 (negative case, no anomaly) or 1 (positive case, anomaly).
 
 The threshold \code{epsilon} is optimized using the F1 score.
-
-NAs are supported in the following way: TODO EXPLANATION.
 }
 \examples{
 # Examples go here.
 
+}
+\references{
+\url{https://www.coursera.org/learn/machine-learning}
 }

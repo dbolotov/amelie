@@ -77,7 +77,7 @@
 
     split_point <- floor((dim(neg_x)[1])*p) #split point for negative observations
     train_x <- neg_x[1:split_point,]
-    train_y <- rep(0,length(1:split_point))
+    # train_y <- rep(0,length(1:split_point))
 
     val_x <- neg_x[(split_point+1):(dim(neg_x)[1]),]
     val_y <- c(rep(0,dim(val_x)[1]),
@@ -95,7 +95,7 @@
     split_index <- c(1:(floor(nrow(x)/2)))
 
     train_x <- x[split_index,]
-    train_y <- y[split_index]
+    # train_y <- y[split_index]
     val_x <- x[-split_index,]
     val_y <- y[-split_index]
   }
@@ -104,8 +104,9 @@
     stop("random must be logical TRUE or FALSE")
   }
 
-  ret <- list(train_x,train_y,val_x,val_y)
-  names(ret) <- c("train_x","train_y","val_x","val_y")
+  # ret <- list(train_x,train_y,val_x,val_y)
+  ret <- list(train_x,val_x,val_y)
+  names(ret) <- c("train_x","val_x","val_y")
 
   return(ret)
 }

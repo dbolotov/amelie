@@ -85,7 +85,7 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
   #split data into training and cross-validation sets
   split_obj <- .split_data(x,y)
   train_x <- split_obj$train_x
-  train_y <- split_obj$train_y #not used, and always expected to be 0
+  # train_y <- split_obj$train_y #not used, and always expected to be 0
   val_x <- split_obj$val_x
   val_y <- split_obj$val_y
 

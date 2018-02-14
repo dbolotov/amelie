@@ -31,9 +31,9 @@
   best_f1 <- 0
   f1 <- 0
 
-  stepsize <- (max(p_val) - min(p_val)) / 1000
+  step_size <- (max(p_val) - min(p_val)) / 1000
 
-  for (epsilon in seq(min(p_val),max(p_val),stepsize)) {
+  for (epsilon in seq(min(p_val),max(p_val),step_size)) {
     predictions <- (p_val < epsilon) #? this makes it so predictions will be all 0 for 1st round of for loop
     f1 <- .f1_score(predictions,y_val)
 
@@ -130,6 +130,11 @@
   #check that y only contains 0 and 1, and that y contains both kinds of examples
   if (!identical(sort(unique(y)),c(0,1))) {
     stop("y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).")
+  }
+
+  #check that x and y don't contain NA
+  if ((any(is.na(x))) | (any(is.na(y)))) {
+    stop("NAs currently not supported.")
   }
 }
 

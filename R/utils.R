@@ -47,37 +47,46 @@
   return(best_epsilon)
 }
 
-.split_data <- function(x,y,random=FALSE){
+.split_data <- function(x,y,random=TRUE,p=0.75){
+  #y: vector
+  #x: matrix
+  #p: ratio of the negative cases to use for training set
+
   #split data into training and validation sets
-  #validation must have posive examples, training none
-  #should training set be allowed to have positive examples?
+  #validation must have posive examples, training set must have none
+
 
   #steps
   #shufle rows in full data set
   #separate into two sets, negatives and posives
-  #move all postives to val, 1/3 of negatives to val, and 2/3 of the negatives to train
+  #move all postives to val,
+  #split negatives between val and train sets
   #shuffle val
-  print(random)
+
+
+  # print(random)
   if (random==TRUE) {
-    full_shuffle_index <- sample(1:length(y))
-    print(full_shuffle_index)
-    x <- x[full_shuffle_index,]
-    y <- y[full_shuffle_index]
+    shuf_idx <- sample(1:length(y))
+    x <- x[shuf_idx,]
+    y <- y[shuf_idx]
 
-    pos_index <- which(y==1)
+    pos_idx <- which(y==1)
 
-    pos_x <- x[pos_index,]
-    #pos_y is implicitly all 1
-    neg_x <- x[-pos_index,]
+    pos_x <- x[pos_idx,]
+    neg_x <- x[-pos_idx,]
 
-    split_point <- floor((length(y)-length(pos_index))*.75)
+    split_point <- floor((dim(neg_x)[1])*p) #split point for negative observations
     train_x <- neg_x[1:split_point,]
     train_y <- rep(0,length(1:split_point))
 
-    val_x <- neg_x[(split_point+1):(length(y)-length(pos_index)),]
-    val_x <- rbind(val_x,pos_x)
-    val_y <- c(rep(0,length((split_point+1):(length(y)-length(pos_index)))),
-               rep(1,length(pos_index))) #combine negative and positive observations
+    val_x <- neg_x[(split_point+1):(dim(neg_x)[1]),]
+    val_y <- c(rep(0,dim(val_x)[1]),
+               rep(1,length(pos_idx))) #combine negative and positive observations
+    val_x <- unname(rbind(val_x,pos_x))
+
+    val_shuf_idx <- sample(1:length(val_y))
+    val_x <- val_x[val_shuf_idx,]
+    val_y <- val_y[val_shuf_idx]
   }
 
   else if (random==FALSE) {
@@ -110,7 +119,19 @@
   return(unname(apply(x,2,sd)))
 }
 
+.check_data <- function(x, y) {
+  #check x and y for problems
 
+  #check that x and y are numeric
+  if ((!is.numeric(x)) | (!is.numeric(y))) {
+    stop("Both x and y must be numeric.")
+  }
+
+  #check that y only contains 0 and 1, and that y contains both kinds of examples
+  if (!identical(sort(unique(y)),c(0,1))) {
+    stop("y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).")
+  }
+}
 
 
 

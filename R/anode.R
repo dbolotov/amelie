@@ -45,12 +45,18 @@ anode.formula <- function(formula, data, na.action = na.omit, ...) {
   call <- match.call()
   if (!inherits(formula, "formula"))
     stop("method is only for formula objects")
+
+  if (!all(sapply(data,is.numeric))) {
+    stop("Both x and y must be numeric.")
+  }
+
   m <- match.call(expand.dots = FALSE)
   if (identical(class(eval.parent(m$data)), "matrix"))
     m$data <- as.data.frame(eval.parent(m$data))
 
   m[[1L]] <- quote(stats::model.frame)
   m$na.action <- na.action
+
   m <- eval(m, parent.frame())
   Terms <- attr(m, "terms")
   attr(Terms, "intercept") <- 0
@@ -75,29 +81,32 @@ anode.formula <- function(formula, data, na.action = na.omit, ...) {
 #' @export
 anode.default <- function(x, y, na.action = na.omit, ...) {
 
-  #split data into train and validation sets
+  #check data
+  .check_data(x,y)
+
+  #split data into training and cross-validation sets
   split_obj <- .split_data(x,y)
   train_x <- split_obj$train_x
-  train_y <- split_obj$train_y
+  train_y <- split_obj$train_y #not used, and always expected to be 0
   val_x <- split_obj$val_x
   val_y <- split_obj$val_y
 
 
-  #mean and variance
+  #compute mean and variance of training set
   train_x_mean <- .mean2(train_x)
   train_x_sd <- .sd2(train_x)
 
-  #product of probabilities
+  #compute product of probabilities on training set
   train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
   val_x_probs_prod <- .univariate_gaussian(val_x,train_x_mean,train_x_sd)
 
-  #optimize epsilon
+  #optimize epsilon using validation set
   epsilon <- .op_epsilon(val_x_probs_prod,val_y)
 
   #compute predictions on training set
   val_predictions <- as.numeric(val_x_probs_prod < epsilon)
 
-  #compute train f1 score
+  #compute f1 score on validation set
   val_score <- .f1_score(val_predictions, val_y)
 
 
@@ -107,7 +116,7 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
                      epsilon = epsilon,
                      train_x_mean = train_x_mean,
                      train_x_sd = train_x_sd,
-                     val_predictions = val_predictions,
+                     # val_predictions = val_predictions,
                      val_score = val_score)
   class(return_obj) <- "anode"
   return(return_obj)

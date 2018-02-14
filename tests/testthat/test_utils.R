@@ -32,9 +32,34 @@ test_that("univariate gaussian is calculated correctly", {
 #TODO tests
 
 
-test_that("data split works correctly", {
-  expect_equal(0,0)
+test_that("data split works correctly 1", {
+  x1 <- c(2,3,4,5,6,7,8,9,10)
+  x2 <- c(22,33,44,55,66,77,88,99,110)
+  x <- do.call(cbind,list(x1,x2))
+  y <- c(0,0,0,0,0,0,0,0,1)
+  set.seed(101)
+  dat <- .split_data(x, y, random = TRUE, p = 0.75)
+  expect_equal(dat$train_y,c(0,0,0,0,0,0))
+  expect_equal(dat$val_y,c(0,1,0))
+  expect_equal(dat$train_x[,1],c(5,2,6,3,8,7))
+  expect_equal(dat$val_x[,1],c(4,10,9))
 })
+
+
+test_that("data split works correctly 2", {
+  x1 <- c(2,3,4,5,6,7,8,9,10)
+  x2 <- c(22,33,44,55,66,77,88,99,110)
+  x <- do.call(cbind,list(x1,x2))
+  y <- c(0,0,0,0,0,0,0,0,1)
+  set.seed(101)
+  dat <- .split_data(x, y, random = TRUE, p = 0.75)
+  expect_equal(dat$train_y,c(0,0,0,0,0,0))
+  expect_equal(dat$val_y,c(0,1,0))
+  expect_equal(dat$train_x[,1],c(5,2,6,3,8,7))
+  expect_equal(dat$val_x[,1],c(4,10,9))
+})
+
+
 
 test_that("epsilon optimization works correctly", {
   expect_equal(0,0)

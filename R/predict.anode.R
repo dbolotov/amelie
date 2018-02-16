@@ -3,7 +3,8 @@
 #' @param object An object of class \code{anode}, created by the function \code{anode}.
 #' @param newdata A data frame or matrix containing new data.
 #' @param type One of 'class' (for class prediction) or 'prob' (for probabilities).
-#' @param na.action TODO
+#' @param na.action A function specifying the action to be taken if NAs are
+#' found; default is to predict NA.
 #' @param ... Currently not used.
 #'
 #' @return A vector of predicted values.

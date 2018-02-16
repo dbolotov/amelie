@@ -22,8 +22,6 @@
 }
 
 .op_epsilon <- function(p_val,y_val) {
-  #optimization as implemented in mlclass.org
-
   #p_val: probability values from validation set
   #y_val: target values from validation set
 

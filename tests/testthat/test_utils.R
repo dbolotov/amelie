@@ -62,6 +62,13 @@ test_that("non-random data split works correctly", {
 })
 
 
+test_that("fail when x and y are of different lengths", {
+  y <- c(0,0,0)
+  expect_error(anode(x = x, y = y),
+               'x and y must have the same number of observations',
+               fixed = TRUE)
+})
+
 
 test_that("epsilon optimization works correctly", {
   expect_equal(0,0)

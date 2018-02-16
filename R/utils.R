@@ -122,6 +122,11 @@
 .check_data <- function(x, y) {
   #check x and y for problems
 
+  #check that x and y are same length
+  if (NROW(x) != length(y)) {
+    stop("x and y must have the same number of observations.")
+  }
+
   #check that x and y are numeric
   if ((!is.numeric(x)) | (!is.numeric(y))) {
     stop("Both x and y must be numeric.")

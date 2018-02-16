@@ -29,34 +29,36 @@ test_that("univariate gaussian is calculated correctly", {
 
 })
 
-#TODO tests
+x1 <- c(2,3,4,5,6,7,8,9,10)
+x2 <- c(22,33,44,55,66,77,88,99,110)
+x <- do.call(cbind,list(x1,x2))
+y <- c(0,0,0,0,0,0,0,0,1)
 
-
-test_that("data split works correctly 1", {
-  x1 <- c(2,3,4,5,6,7,8,9,10)
-  x2 <- c(22,33,44,55,66,77,88,99,110)
-  x <- do.call(cbind,list(x1,x2))
-  y <- c(0,0,0,0,0,0,0,0,1)
+test_that("random data split works correctly 1", {
   set.seed(101)
-  dat <- .split_data(x, y, random = TRUE, p = 0.75)
-  # expect_equal(dat$train_y,c(0,0,0,0,0,0))
+  dat <- .split_data(x, y)
   expect_equal(dat$val_y,c(0,1,0))
   expect_equal(dat$train_x[,1],c(5,2,6,3,8,7))
   expect_equal(dat$val_x[,1],c(4,10,9))
 })
 
+test_that("random data split works correctly 2", {
+  set.seed(232)
+  dat <- .split_data(x, y, p = 0.5)
+  expect_equal(dat$val_y,c(0,0,0,0,1))
+  expect_equal(dat$train_x[,1],c(9,2,4,5))
+  expect_equal(dat$val_x[,1],c(7,8,6,3,10))
+})
 
-test_that("data split works correctly 2", {
-  x1 <- c(2,3,4,5,6,7,8,9,10)
-  x2 <- c(22,33,44,55,66,77,88,99,110)
+test_that("non-random data split works correctly", {
+  x1 <- c(2,3,4,5,6,7,8,9,10,11)
+  x2 <- c(22,33,44,55,66,77,88,99,111,222)
   x <- do.call(cbind,list(x1,x2))
-  y <- c(0,0,0,0,0,0,0,0,1)
-  set.seed(101)
-  dat <- .split_data(x, y, random = TRUE, p = 0.75)
-  # expect_equal(dat$train_y,c(0,0,0,0,0,0))
-  expect_equal(dat$val_y,c(0,1,0))
-  expect_equal(dat$train_x[,1],c(5,2,6,3,8,7))
-  expect_equal(dat$val_x[,1],c(4,10,9))
+  y <- c(0,0,0,0,0,0,0,1,0,1)
+  dat <- .split_data(x, y, random = FALSE, p = 0.66)
+  expect_equal(dat$val_y,c(0,1,0,1))
+  expect_equal(dat$train_x[,1],c(2,3,4,5,6,7))
+  expect_equal(dat$val_x[,1],c(8,9,10,11))
 })
 
 

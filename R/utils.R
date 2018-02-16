@@ -46,20 +46,22 @@
 }
 
 .split_data <- function(x,y,random=TRUE,p=0.75){
+  #split data into training and validation sets
+  #validation must have posive examples, training set must have none
+
   #y: vector
   #x: matrix
   #p: ratio of the negative cases to use for training set
 
-  #split data into training and validation sets
-  #validation must have posive examples, training set must have none
-
-
-  #steps
+  #steps for random split:
   #shufle rows in full data set
   #separate into two sets, negatives and posives
   #move all postives to val,
   #split negatives between val and train sets
-  #shuffle val
+  #shuffle val that now has positive and negative examples
+
+  #steps for non-random split:
+  #first part of p goes to train, second part goes to val
 
 
   # print(random)
@@ -88,14 +90,13 @@
   }
 
   else if (random==FALSE) {
-    #non-randomly split data into training and validation sets
+    #non-randomly split data into training and validation sets, regardless of class
+    split_point <- floor((length(y))*p)
+    # split_index <- c(1:(floor(nrow(x)/2)))
 
-    split_index <- c(1:(floor(nrow(x)/2)))
-
-    train_x <- x[split_index,]
-    # train_y <- y[split_index]
-    val_x <- x[-split_index,]
-    val_y <- y[-split_index]
+    train_x <- x[1:split_point,]
+    val_x <- x[-c(1:split_point),]
+    val_y <- y[-c(1:split_point)]
   }
 
   else {

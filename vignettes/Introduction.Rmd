@@ -31,7 +31,7 @@ $$p(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigm
 
 #### Parameter estimation
 
-The normal distribution is parametrized by mean $\mu$ and variance $\sigma^2$. For a data set $\{x_1,x_2, ..., x_m\}$, the parameters are estimated using the following:
+The normal distribution is parametrized by mean $\mu$ and variance $\sigma^2$. For a data set $\{x_1,x_2, ..., x_m\}$, the parameters are estimated using maximum likelihood:
 
 $$\mu = \frac{1}{m}\sum_{i=1}^{m}x_i$$
 $$\sigma^2 = \frac{1}{m}\sum_{i=1}^{m}(x_i-\mu)^2$$

@@ -5,7 +5,7 @@
 \alias{anode.formula}
 \alias{anode.default}
 \alias{print.anode}
-\title{anode: supervised anomaly detection with normal probability
+\title{amelie: supervised anomaly detection with normal probability
 functions.}
 \usage{
 anode(x, ...)
@@ -38,11 +38,11 @@ An object of class \code{anode}:
   \item{epsilon}{The threshold value.}
 }
 \description{
-anode: supervised anomaly detection with normal probability
+amelie: supervised anomaly detection with normal probability
 functions.
 }
 \details{
-\code{anode} implements anomaly detection as described in Andrew Ng's Machine
+\code{amelie} implements anomaly detection as described in Andrew Ng's Machine
 Learning course.
 
 Features are assumed to be continuous, and the target is assumed to take

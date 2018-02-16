@@ -5,7 +5,7 @@
 About
 -----
 
-anode implements anomaly detection with Gaussian probability functions, as described in the Coursera [Machine Learning Course](https://www.coursera.org/learn/machine-learning).
+`amelie` implements anomaly detection with normal probability functions and maximum likelihood estimates. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
 
 Current version: 0.0.0.9000 (IN DEVELOPMENT)
 

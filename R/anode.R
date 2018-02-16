@@ -1,4 +1,4 @@
-#' anode: supervised anomaly detection with normal probability
+#' amelie: supervised anomaly detection with normal probability
 #' functions.
 #'
 #' @param formula An object of class "formula": a symbolic description of the
@@ -17,13 +17,18 @@
 #'
 #' @details
 #'
-#' \code{anode} implements anomaly detection as described in Andrew Ng's Machine
-#' Learning course.
+#' \code{amelie} implements anomaly detection with normal probability functions
+#' and maximum likelihood estimates.
 #'
 #' Features are assumed to be continuous, and the target is assumed to take
 #' on values of 0 (negative case, no anomaly) or 1 (positive case, anomaly).
 #'
 #' The threshold \code{epsilon} is optimized using the F1 score.
+#'
+#' Algorithm details are described in the Introduction vignette.
+#'
+#' The package follows the anomaly detection approach in Andrew Ng's course on
+#' machine learning.
 #'
 #' @references
 #' \url{https://www.coursera.org/learn/machine-learning}

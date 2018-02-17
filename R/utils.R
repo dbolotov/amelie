@@ -29,15 +29,22 @@
   best_f1 <- 0
   f1 <- 0
 
-  step_size <- (max(p_val) - min(p_val)) / 1000
+  step_size <- (max(p_val) - min(p_val)) / 100
 
+  print(c("best_f1","f1","epsilon"))
   for (epsilon in seq(min(p_val),max(p_val),step_size)) {
+
     predictions <- (p_val < epsilon) #? this makes it so predictions will be all 0 for 1st round of for loop
     f1 <- .f1_score(predictions,y_val)
+
+    print(c(best_f1, f1, best_epsilon, epsilon))
+
+
 
     if(is.nan(f1)){f1<-0} #matlab/octave implementation will return 0 if comparing Nan with a number. R will not.
 
     if (f1 > best_f1) {
+      print('best')
       best_f1 <- f1
       best_epsilon <- epsilon
     }
@@ -84,9 +91,9 @@
                rep(1,length(pos_idx))) #combine negative and positive observations
     val_x <- unname(rbind(val_x,pos_x))
 
-    val_shuf_idx <- sample(1:length(val_y))
-    val_x <- val_x[val_shuf_idx,]
-    val_y <- val_y[val_shuf_idx]
+    # val_shuf_idx <- sample(1:length(val_y))
+    # val_x <- val_x[val_shuf_idx,]
+    # val_y <- val_y[val_shuf_idx]
   }
 
   else if (random==FALSE) {

@@ -4,7 +4,7 @@
 \name{amelie}
 \alias{amelie}
 \alias{amelie-package}
-\title{amelie: A package for anomaly ditection.}
+\title{amelie: A package for anomaly detection.}
 \description{
 Anomaly detection with maximum likelihood estimates and normal probability functions.
 }

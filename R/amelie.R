@@ -1,4 +1,4 @@
-#' amelie: A package for anomaly ditection.
+#' amelie: A package for anomaly detection.
 #'
 #' Anomaly detection with maximum likelihood estimates and normal probability functions.
 #'

@@ -1,5 +1,4 @@
-#' amelie: supervised anomaly detection with normal probability
-#' functions.
+#' ad: anomaly detection with normal probability functions.
 #'
 #' @param formula An object of class "formula": a symbolic description of the
 #' model to be fitted.
@@ -11,8 +10,8 @@
 #' found.
 #' @param ... Currently not used.
 #'
-#' @return An object of class \code{anode}:
-#'   \item{call}{The original call to \code{anode}.}
+#' @return An object of class \code{ad}:
+#'   \item{call}{The original call to \code{ad}.}
 #'   \item{epsilon}{The threshold value.}
 #'
 #' @details
@@ -40,13 +39,13 @@
 
 
 #'@export
-anode <- function(x, ...){
-  UseMethod("anode")
+ad <- function(x, ...){
+  UseMethod("ad")
 }
 
-#'@rdname anode
+#'@rdname ad
 #'@export
-anode.formula <- function(formula, data, na.action = na.omit, ...) {
+ad.formula <- function(formula, data, na.action = na.omit, ...) {
   call <- match.call()
   if (!inherits(formula, "formula"))
     stop("method is only for formula objects")
@@ -70,21 +69,21 @@ anode.formula <- function(formula, data, na.action = na.omit, ...) {
   y <- model.extract(m, "response")
   attr(x, "na.action") <- attr(y, "na.action") <- attr(m, "na.action")
 
-  return_object <- anode.default(x, y, na.action = na.action)
+  return_object <- ad.default(x, y, na.action = na.action)
   return_object$call <- call
-  return_object$call[[1]] <- as.name("anode")
+  return_object$call[[1]] <- as.name("ad")
   return_object$terms <- Terms
   if (!is.null(attr(m, "na.action")))
     return_object$na.action <- attr(m, "na.action")
-  class(return_object) <- c("anode.formula", class(return_object))
+  class(return_object) <- c("ad.formula", class(return_object))
   return (return_object)
 }
 
 
 
-#' @rdname anode
+#' @rdname ad
 #' @export
-anode.default <- function(x, y, na.action = na.omit, ...) {
+ad.default <- function(x, y, na.action = na.omit, ...) {
 
   #check data
   .check_data(x,y)
@@ -123,14 +122,14 @@ anode.default <- function(x, y, na.action = na.omit, ...) {
                      train_x_sd = train_x_sd,
                      # val_predictions = val_predictions,
                      val_score = val_score)
-  class(return_obj) <- "anode"
+  class(return_obj) <- "ad"
   return(return_obj)
 }
 
 
-#' @rdname anode
+#' @rdname ad
 #' @export
-print.anode <- function(x, ...) {
+print.ad <- function(x, ...) {
   cat("Call:\n")
   print(x$call)
   cat("\n")

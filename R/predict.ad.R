@@ -1,10 +1,10 @@
-#' Predict Method for anode Objects
+#' Predict method for ad Objects
 #'
-#' @param object An object of class \code{anode}, created by the function \code{anode}.
+#' @param object An object of class \code{ad}, created by the function \code{ad}.
 #' @param newdata A data frame or matrix containing new data.
 #' @param type One of 'class' (for class prediction) or 'prob' (for probabilities).
 #' @param na.action A function specifying the action to be taken if NAs are
-#' found; default is to predict NA.
+#' found; default is to predict NA (na.pass).
 #' @param ... Currently not used.
 #'
 #' @return A vector of predicted values.
@@ -16,24 +16,24 @@
 #' @examples
 #' # Examples go here.
 #'
-#'@importFrom stats delete.response model.frame
+#'@importFrom stats delete.response model.frame na.pass
 #'
 #'
 #'@export
-predict.anode <- function(object, newdata, type = 'class', na.action = na.pass, ...) {
-  if (!inherits(object, "anode"))
-    stop("Object not of class anode.")
+predict.ad <- function(object, newdata, type = 'class', na.action = na.pass, ...) {
+  if (!inherits(object, "ad"))
+    stop("Object not of class ad.")
 
   if (!(type %in% c('class','prob'))){
     stop("type must be either 'class' or 'prob'.")
   }
 
-  if (inherits(object, "anode.formula")) {
+  if (inherits(object, "ad.formula")) {
     newdata <- as.data.frame(newdata)
     rn <- row.names(newdata)
     Terms <- delete.response(object$terms)
     x <- model.frame(Terms, newdata, na.action = na.action)
-  } else { #must inherit from anode.default
+  } else { #must inherit from ad.default
     if (is.null(dim(newdata)))
       dim(newdata) <- c(1, length(newdata))
     x <- newdata

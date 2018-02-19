@@ -31,20 +31,20 @@
 
   step_size <- (max(p_val) - min(p_val)) / 100
 
-  print(c("best_f1","f1","epsilon"))
+  # print(c("best_f1","f1","epsilon"))
   for (epsilon in seq(min(p_val),max(p_val),step_size)) {
 
     predictions <- (p_val < epsilon) #? this makes it so predictions will be all 0 for 1st round of for loop
     f1 <- .f1_score(predictions,y_val)
 
-    print(c(best_f1, f1, best_epsilon, epsilon))
+    # print(c(best_f1, f1, best_epsilon, epsilon))
 
 
 
     if(is.nan(f1)){f1<-0} #matlab/octave implementation will return 0 if comparing Nan with a number. R will not.
 
     if (f1 > best_f1) {
-      print('best')
+      # print('best')
       best_f1 <- f1
       best_epsilon <- epsilon
     }

@@ -5,9 +5,9 @@
 About
 -----
 
-`amelie` implements anomaly detection withmaximum likelihood estimates and normal probability functions. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
+`amelie` implements anomaly detection with maximum likelihood estimates and normal probability functions. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
 
-Current version: 0.0.0.9000 (IN DEVELOPMENT)
+Current version: 0.0.1
 
 Installation
 ------------
@@ -23,5 +23,11 @@ Example
 
 ``` r
 library(amelie)
-#TODO
+
+x1 <- c(1,.2,3,1,1,.7,-2,-1)
+x2 <- c(0,.5,0,.4,0,1,-.3,-.1)
+x <- do.call(cbind,list(x1,x2))
+y <- c(0,0,0,0,0,0,1,1)
+dframe <- data.frame(x,y)
+df_fit <- ad(y ~ x1 + x2, dframe)
 ```

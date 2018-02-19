@@ -1,7 +1,7 @@
 Package: amelie
 Type: Package
 Title: Anomaly Detection with Normal Probability Functions
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(person("Dmitriy", "Bolotov", email = "dbolotov@live.com", role = c("aut", "cre")))
 Description: Anomaly detection with normal probability functions.
 Imports: stats

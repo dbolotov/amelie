@@ -3,8 +3,8 @@
 #'@importFrom stats dnorm na.omit model.extract model.matrix
 
 .univariate_gaussian <- function(x,x_mean,x_sd) {
-  probs <- rep(NA,nrow(x))
-  for (r in 1:nrow(x)) {
+  probs <- rep(NA,NROW(x))
+  for (r in 1:NROW(x)) {
     probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
   }
   return(probs)
@@ -99,7 +99,6 @@
   else if (random==FALSE) {
     #non-randomly split data into training and validation sets, regardless of class
     split_point <- floor((length(y))*p)
-    # split_index <- c(1:(floor(nrow(x)/2)))
 
     train_x <- x[1:split_point,]
     val_x <- x[-c(1:split_point),]
@@ -110,7 +109,6 @@
     stop("random must be logical TRUE or FALSE")
   }
 
-  # ret <- list(train_x,train_y,val_x,val_y)
   ret <- list(train_x,val_x,val_y)
   names(ret) <- c("train_x","val_x","val_y")
 
@@ -149,18 +147,3 @@
     stop("NAs currently not supported.")
   }
 }
-
-
-
-
-
-#
-# #product of probabilities
-# x_probs_prod <- rep(NA,nrow(x))
-# for (r in 1:nrow(x)) {
-#   x_probs_prod[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
-# }
-#
-#randomly split data into training and validation sets
-# split_index <- sample.int(n = nrow(x), size = floor(.5*nrow(x)), replace = FALSE)
-

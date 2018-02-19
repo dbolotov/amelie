@@ -70,6 +70,6 @@ test_that("fail when x and y are of different lengths", {
 })
 
 
-test_that("epsilon optimization works correctly", {
-  expect_equal(0,0)
-})
+# test_that("epsilon optimization works correctly", {
+#   expect_equal(0,0)
+# })

@@ -4,7 +4,9 @@ Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 7 x64 (build 7601) Service Pack 1
 
 ## R CMD check results
-0 errors | 0 warnings | 0 notes
+There were no ERRORs.
+
+There was 1 NOTE due to this package being a new submission.
 
 There was 1 WARNING, despite not showing up in the summary above:
 

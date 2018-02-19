@@ -37,9 +37,9 @@ y <- c(0,0,0,0,0,0,0,0,1)
 test_that("random data split works correctly 1", {
   set.seed(101)
   dat <- .split_data(x, y)
-  expect_equal(dat$val_y,c(0,1,0))
+  expect_equal(dat$val_y,c(0,0,1))
   expect_equal(dat$train_x[,1],c(5,2,6,3,8,7))
-  expect_equal(dat$val_x[,1],c(4,10,9))
+  expect_equal(dat$val_x[,1],c(9,4,10))
 })
 
 test_that("random data split works correctly 2", {
@@ -47,7 +47,7 @@ test_that("random data split works correctly 2", {
   dat <- .split_data(x, y, p = 0.5)
   expect_equal(dat$val_y,c(0,0,0,0,1))
   expect_equal(dat$train_x[,1],c(9,2,4,5))
-  expect_equal(dat$val_x[,1],c(7,8,6,3,10))
+  expect_equal(dat$val_x[,1],c(6,3,8,7,10))
 })
 
 test_that("non-random data split works correctly", {
@@ -64,7 +64,7 @@ test_that("non-random data split works correctly", {
 
 test_that("fail when x and y are of different lengths", {
   y <- c(0,0,0)
-  expect_error(anode(x = x, y = y),
+  expect_error(ad(x = x, y = y),
                'x and y must have the same number of observations',
                fixed = TRUE)
 })

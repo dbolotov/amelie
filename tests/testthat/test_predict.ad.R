@@ -1,4 +1,4 @@
-context("predict.anode function")
+context("predict.ad function")
 
 x1 <- c(1,.2,3,1,1,.7,-2,-1)
 x2 <- c(0,.5,0,.4,0,1,-.3,-.1)
@@ -7,9 +7,9 @@ y <- c(0,0,0,0,0,0,1,1)
 dframe <- data.frame(x,y)
 names(dframe) <- c("x1","x2","y")
 set.seed(1234)
-df_fit <- anode(y ~ x1 + x2, dframe)
+df_fit <- ad(y ~ x1 + x2, dframe)
 set.seed(1234)
-mat_fit <- anode(x = x, y = y)
+mat_fit <- ad(x = x, y = y)
 
 x1 <- c(NA,2,3,4)
 x2 <- c(0.4,0.3,0.2,0.1)
@@ -19,9 +19,9 @@ dframe_test <- data.frame(x,y)
 names(dframe_test) <- c("x1","x2","y")
 
 
-test_that("fail when object does not inherit from anode", {
+test_that("fail when object does not inherit from ad", {
   a <- "a test string"
-  expect_error(predict.anode(a,iris),"Object not of class anode.")
+  expect_error(predict.ad(a,iris),"Object not of class ad.")
 })
 
 test_that("fail when type is not class or prob", {

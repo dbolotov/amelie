@@ -1,4 +1,4 @@
-context("anode object")
+context("ad object")
 
 
 test_that("class of fit object excludes formula when using default notation",{
@@ -8,13 +8,13 @@ test_that("class of fit object excludes formula when using default notation",{
   x <- do.call(cbind,list(x1,x2))
   y <- c(0,0,0,0,0,0,1,1)
   dframe <- data.frame(x,y)
-  df_fit <- anode(y ~ x1 + x2, dframe)
-  mat_fit <- anode(x = x, y = y)
-  expect_identical(class(df_fit),c("anode.formula","anode"))
-  expect_identical(class(mat_fit),c("anode"))
-  expect_is(df_fit,c("anode"))
-  expect_is(df_fit,c("anode.formula")) #check inheritance
-  expect_is(mat_fit,c("anode")) #check inheritance
+  df_fit <- ad(y ~ x1 + x2, dframe)
+  mat_fit <- ad(x = x, y = y)
+  expect_identical(class(df_fit),c("ad.formula","ad"))
+  expect_identical(class(mat_fit),c("ad"))
+  expect_is(df_fit,c("ad"))
+  expect_is(df_fit,c("ad.formula")) #check inheritance
+  expect_is(mat_fit,c("ad")) #check inheritance
 })
 
 
@@ -25,9 +25,9 @@ test_that("fit is exactly the same for formula and matrix data",{
   y <- c(0,0,0,0,0,0,1,1)
   dframe <- data.frame(x,y)
   set.seed(321)
-  df_fit <- anode(y ~ x1 + x2, dframe)
+  df_fit <- ad(y ~ x1 + x2, dframe)
   set.seed(321)
-  mat_fit <- anode(x = x, y = y)
+  mat_fit <- ad(x = x, y = y)
   expect_identical(df_fit$epsilon,mat_fit$epsilon)
   expect_identical(df_fit$train_x_mean,mat_fit$train_x_mean)
   expect_identical(df_fit$train_x_sd,mat_fit$train_x_sd)
@@ -43,8 +43,8 @@ test_that("fit object contains required attributes", {
   x <- do.call(cbind,list(x1,x2))
   y <- c(0,0,0,0,0,0,1,1)
   dframe <- data.frame(x,y)
-  df_fit <- anode(y ~ x1 + x2, dframe)
-  mat_fit <- anode(x = x, y = y)
+  df_fit <- ad(y ~ x1 + x2, dframe)
+  mat_fit <- ad(x = x, y = y)
 
   expect_equal(attributes(df_fit)$names,c("call", "epsilon", "train_x_mean",
                                           "train_x_sd",
@@ -61,8 +61,8 @@ test_that("fail when x or y is not numeric", {
   x <- do.call(cbind,list(x1,x2))
   y <- c(0,0,0,0,0,0,1,1)
   dframe <- data.frame(x,y)
-  expect_error(anode(y ~ x1 + x2, dframe),"Both x and y must be numeric.", fixed = TRUE)
-  expect_error(anode(x = x, y = y),"Both x and y must be numeric.", fixed = TRUE)
+  expect_error(ad(y ~ x1 + x2, dframe),"Both x and y must be numeric.", fixed = TRUE)
+  expect_error(ad(x = x, y = y),"Both x and y must be numeric.", fixed = TRUE)
 })
 
 test_that("fail when y has anything other than 0 and 1", {
@@ -71,17 +71,17 @@ test_that("fail when y has anything other than 0 and 1", {
   x <- do.call(cbind,list(x1,x2))
   y <- c(0,0,0,0,0,0,1,2)
   dframe <- data.frame(x,y)
-  expect_error(anode(y ~ x1 + x2, dframe),"y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).",
+  expect_error(ad(y ~ x1 + x2, dframe),"y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).",
                fixed = TRUE)
 
   y <- c(0,0,0,0,0,0,0,0)
   dframe <- data.frame(x,y)
-  expect_error(anode(y ~ x1 + x2, dframe),"y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).",
+  expect_error(ad(y ~ x1 + x2, dframe),"y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).",
                fixed = TRUE)
 
   y <- c(1,1,1,1,1,1,1,1)
   dframe <- data.frame(x,y)
-  expect_error(anode(y ~ x1 + x2, dframe),"y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).",
+  expect_error(ad(y ~ x1 + x2, dframe),"y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).",
                fixed = TRUE)
 
 })
@@ -94,9 +94,9 @@ test_that("NAs are treated correctly", {
   y <- c(0,0,0,0,0,0,1,1)
   dframe <- data.frame(x,y)
   set.seed(142)
-  df_fit <- anode(y ~ x1 + x2, dframe)
+  df_fit <- ad(y ~ x1 + x2, dframe)
   expect_equal(df_fit$train_x_mean,c(1.966667,1.466667), tolerance = 0.00001)
-  expect_equal(df_fit$epsilon,0.004203277)
+  expect_equal(df_fit$epsilon,0.004755208)
 })
 
 
@@ -108,11 +108,11 @@ test_that("NAs are treated correctly", {
 #   x <- do.call(cbind,list(x1,x2))
 #   y <- c(0,0,0,0,0,1,1,1)
 #   dframe <- data.frame(x,y)
-#   df_fit <- anode(y ~ x1 + x2, dframe)
-#   mat_fit <- anode(x = x, y = y)
+#   df_fit <- ad(y ~ x1 + x2, dframe)
+#   mat_fit <- ad(x = x, y = y)
 #
 #   expect_output(print(df_fit),"Call:
-# anode(formula = y ~ x1 + x2, data = dframe)
+# ad(formula = y ~ x1 + x2, data = dframe)
 #
 # epsilon: 0.02435071")
 # })

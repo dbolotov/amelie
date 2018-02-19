@@ -1,4 +1,4 @@
 library(testthat)
-library(anode)
+library(amelie)
 
-test_check("anode")
+test_check("amelie")

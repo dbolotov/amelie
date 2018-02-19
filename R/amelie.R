@@ -8,10 +8,7 @@
 #' @section More information:
 #' \code{\link{ad}} documents the main \code{ad} function.
 #'
-#' For more details and examples, see the vignette by running the following:
-#'
-#' \code{vignette("Introduction")}
-#'
+#' For more details and examples, see the vignette.
 #'
 #' @docType package
 #' @name amelie

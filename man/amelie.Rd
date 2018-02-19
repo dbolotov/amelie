@@ -17,8 +17,6 @@ The package contains a function for running the anomaly detection algorithm.
 
 \code{\link{ad}} documents the main \code{ad} function.
 
-For more details and examples, see the vignette by running the following:
-
-\code{vignette("Introduction")}
+For more details and examples, see the vignette.
 }
 

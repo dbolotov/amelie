@@ -5,7 +5,7 @@
 About
 -----
 
-`amelie` implements anomaly detection with normal probability functions and maximum likelihood estimates. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
+`amelie` implements anomaly detection withmaximum likelihood estimates and normal probability functions. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
 
 Current version: 0.0.0.9000 (IN DEVELOPMENT)
 
@@ -15,13 +15,13 @@ Installation
 ``` r
 # Development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("dbolotov/anode")
+devtools::install_github("dbolotov/amelie")
 ```
 
 Example
 -------
 
 ``` r
-library(anode)
+library(amelie)
 #TODO
 ```

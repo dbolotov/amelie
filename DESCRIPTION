@@ -3,7 +3,9 @@ Type: Package
 Title: Anomaly Detection with Normal Probability Functions
 Version: 0.1.0
 Authors@R: c(person("Dmitriy", "Bolotov", email = "dbolotov@live.com", role = c("aut", "cre")))
-Description: Anomaly detection with normal probability functions.
+Description: Implements anomaly detection as binary classification for cross-sectional data. 
+Uses maximum likelihood estimates and normal probability functions to classify observations as anomalous.
+The method is presented in the Machine Learning course by Andrew Ng: https://www.coursera.org/learn/machine-learning.
 Imports: stats
 License: GPL (>= 3)
 Encoding: UTF-8

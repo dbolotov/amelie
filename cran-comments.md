@@ -1,3 +1,14 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Elaborated on the algorithm in the DESCRIPTION.
+
+* Added a sentence on where the algorithm is presented. I am not able
+to find a published reference for this specific algorithm. The idea is 
+described in Andrew Ng's Machine Learning course on Coursera here: 
+https://www.coursera.org/learn/machine-learning. This package includes a vignette
+that details the algorithm.
+
 ## Test environments
 R version 3.4.3 (2017-11-30)
 Platform: x86_64-w64-mingw32/x64 (64-bit)

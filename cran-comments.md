@@ -1,6 +1,13 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
+* Added a link to the specific video where the algorithm is presented.
+
+* Added a doi reference to a paper where the algorithm is described.
+
+## Resubmission
+This is a resubmission. In this version I have:
+
 * Elaborated on the algorithm in the DESCRIPTION.
 
 * Added a sentence on where the algorithm is presented. I am not able

@@ -28,9 +28,16 @@ Current version: 0.0.1
 ## Installation
 
 ```{r, eval = FALSE}
-# Development version from GitHub:
+# Install from CRAN:
+install.packages("amelie")
+
+# Install from GitHub:
 # install.packages("devtools")
 devtools::install_github("dbolotov/amelie")
+
+# Install latest changes from GitHub
+# install.packages("devtools")
+devtools::install_github(repo = "dbolotov/amelie", ref = "multivariate")
 ```
 
 

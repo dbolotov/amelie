@@ -13,7 +13,10 @@ Installation
 ------------
 
 ``` r
-# Development version from GitHub:
+# Install from CRAN:
+install.packages("amelie")
+
+# Install latest changes from GitHub:
 # install.packages("devtools")
 devtools::install_github("dbolotov/amelie")
 ```

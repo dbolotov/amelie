@@ -25,9 +25,18 @@ test_that(".sd2 is calculated correctly", {
 
 test_that("univariate gaussian is calculated correctly", {
   dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
-  expect_equal(.univariate_gaussian(dmat,c(0,0,0,0),c(1,1,1,1)),c(2.565983e-07, 1.035191e-04), tolerance = 0.00002)
+  expect_equal(.univariate_gaussian(dmat,c(0,0,0,0),c(1,1,1,1)),
+               c(2.565983e-07, 1.035191e-04), tolerance = 0.00002)
 
 })
+
+test_that("multivariate gaussian is calculated correctly", {
+  dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
+  expect_equal(.multivariate_gaussian(dmat,c(0,0,0,0),c(1,1,1,1)),
+               c(2.565983e-07, 1.035191e-04), tolerance = 0.00002)
+
+})
+
 
 x1 <- c(2,3,4,5,6,7,8,9,10)
 x2 <- c(22,33,44,55,66,77,88,99,110)

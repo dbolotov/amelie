@@ -52,7 +52,7 @@ ad <- function(x, ...){
 
 #'@rdname ad
 #'@export
-ad.formula <- function(formula, data, na.action = na.omit, ...) {
+ad.formula <- function(formula, data, univariate = TRUE, na.action = na.omit, ...) {
   call <- match.call()
   if (!inherits(formula, "formula"))
     stop("method is only for formula objects")
@@ -76,7 +76,7 @@ ad.formula <- function(formula, data, na.action = na.omit, ...) {
   y <- model.extract(m, "response")
   attr(x, "na.action") <- attr(y, "na.action") <- attr(m, "na.action")
 
-  return_object <- ad.default(x, y, na.action = na.action)
+  return_object <- ad.default(x, y, univariate, na.action = na.action)
   return_object$call <- call
   return_object$call[[1]] <- as.name("ad")
   return_object$terms <- Terms
@@ -90,7 +90,7 @@ ad.formula <- function(formula, data, na.action = na.omit, ...) {
 
 #' @rdname ad
 #' @export
-ad.default <- function(x, y, na.action = na.omit, ...) {
+ad.default <- function(x, y, univariate = TRUE, na.action = na.omit, ...) {
 
   #check data
   .check_data(x,y)
@@ -108,9 +108,13 @@ ad.default <- function(x, y, na.action = na.omit, ...) {
   train_x_sd <- .sd2(train_x)
 
   #compute product of probabilities on training set
-  train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
-  val_x_probs_prod <- .univariate_gaussian(val_x,train_x_mean,train_x_sd)
-
+  if (univariate == TRUE) {
+    train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
+    val_x_probs_prod <- .univariate_gaussian(val_x,train_x_mean,train_x_sd)
+  } else {
+    train_x_probs_prod <- .multivariate_gaussian(train_x,train_x_mean,train_x_sd)
+    val_x_probs_prod <- .multivariate_gaussian(val_x,train_x_mean,train_x_sd)
+  }
   #optimize epsilon using validation set
   epsilon <- .op_epsilon(val_x_probs_prod,val_y)
 

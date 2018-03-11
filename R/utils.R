@@ -10,6 +10,14 @@
   return(probs)
 }
 
+.multivariate_gaussian <- function(x,x_mean,x_sd) {
+  probs <- rep(NA,NROW(x))
+  for (r in 1:NROW(x)) {
+    probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
+  }
+  return(probs)
+}
+
 
 .f1_score <- function(y_hat,y) {
   #assumes that "1" is the positive result

@@ -69,16 +69,13 @@ Using the above assumptions and definitions, the algorithm is implemented as fol
 
 ### Extending the univariate anomaly detection algorithm
 
-It is possible to extend the above algorithm by using multivariate version of the normal distribution. In this case, the features are not assumed to be independent.
+It is possible to extend the above algorithm by using multivariate version of the normal distribution. In this case, the features are not assumed to be independent, and $p$ is not a product of independent densities.
 
 #### Multivariate normal distribution
 
 For parameters $\mu \in R^n$ and $\Sigma \in R^{n * n}$, the multivariate probability density function is given by:
 
 $$p(x; \mu, \Sigma) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}e^{(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))}$$
-
-In this case, $p$ is not a product of independent densities.
-
 
 ### Examples
 

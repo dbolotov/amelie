@@ -1,4 +1,4 @@
-#' ad: anomaly detection with normal probability functions.
+#' ad: anomaly detection with normal probability density functions.
 #'
 #' @param formula An object of class "formula": a symbolic description of the
 #' model to be fitted.

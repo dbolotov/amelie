@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/dbolotov/anode.svg?branch=master)](https://travis-ci.org/dbolotov/anode) [![Codecov Status](https://codecov.io/github/codecov/example-r/branch/master/graphs/badge.svg)](https://codecov.io/github/codecov/example-r) [![CRAN Status](https://www.r-pkg.org/badges/version/amelie)](https://cran.r-project.org/package=amelie)
+[![travis-ci build status](https://travis-ci.org/dbolotov/anode.svg?branch=master)](https://travis-ci.org/dbolotov/anode) [![codecov status](https://codecov.io/gh/dbolotov/amelie/branch/master/graph/badge.svg?token=6zwhRQCB4W)](https://codecov.io/gh/dbolotov/amelie) [![CRAN status](https://www.r-pkg.org/badges/version/amelie)](https://cran.r-project.org/package=amelie)
 
 About
 -----

@@ -29,7 +29,7 @@
 #'@export
 predict.ad <- function(object, newdata, type = 'class', na.action = na.pass, ...) {
   if (!inherits(object, "ad"))
-    stop("Object not of class ad.")
+    stop("object not of class ad.")
 
   if (!(type %in% c('class','prob'))){
     stop("type must be either 'class' or 'prob'.")

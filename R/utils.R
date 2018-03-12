@@ -12,9 +12,12 @@
 
 .multivariate_gaussian <- function(x,x_mean,x_sd) {
   probs <- rep(NA,NROW(x))
-  for (r in 1:NROW(x)) {
-    probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
-  }
+  n <- length(x_mean)
+  x_sd_2 <- diag(x_sd^2)
+
+  x_no_m <- as.matrix(sweep(x,2,x_mean))
+
+  probs <- ((2*pi)^(-n/2)) * ((det(x_sd_2))^(-0.5)) * exp(-0.5 * rowSums((x_no_m %*% solve(x_sd_2)) * x_no_m))
   return(probs)
 }
 

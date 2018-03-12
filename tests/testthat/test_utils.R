@@ -23,19 +23,41 @@ test_that(".sd2 is calculated correctly", {
 })
 
 
-test_that("univariate gaussian is calculated correctly", {
+test_that("univariate gaussian is calculated correctly 1", {
   dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
   expect_equal(.univariate_gaussian(dmat,c(0,0,0,0),c(1,1,1,1)),
                c(2.565983e-07, 1.035191e-04), tolerance = 0.00002)
 
 })
 
-test_that("multivariate gaussian is calculated correctly", {
+test_that("univariate gaussian is calculated correctly 2", {
   dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
-  expect_equal(.multivariate_gaussian(dmat,c(0,0,0,0),c(1,1,1,1)),
+  x_mean <- .mean2(dmat)
+  x_sd <- .sd2(dmat)
+  expect_equal(.univariate_gaussian(dmat,x_mean,x_sd),
+               c(0.009318495, 0.009318495), tolerance = 0.00002)
+
+})
+
+test_that("multivariate gaussian is calculated correctly 1 ", {
+  dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
+  x_mean <- c(0,0,0,0)
+  x_sd <- c(1,1,1,1)
+  expect_equal(.multivariate_gaussian(dmat,x_mean,x_sd),
                c(2.565983e-07, 1.035191e-04), tolerance = 0.00002)
 
 })
+
+
+test_that("multivariate gaussian is calculated correctly 2", {
+  dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
+  x_mean <- .mean2(dmat)
+  x_sd <- .sd2(dmat)
+  expect_equal(.multivariate_gaussian(dmat,x_mean,x_sd),
+               c(0.009318495, 0.009318495), tolerance = 0.00002)
+
+})
+
 
 
 x1 <- c(2,3,4,5,6,7,8,9,10)

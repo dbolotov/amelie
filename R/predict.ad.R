@@ -56,7 +56,7 @@ predict.ad <- function(object, newdata, type = 'class', na.action = na.pass, ...
 
 
   #prediction
-  newdata_probs_prod <- .univariate_gaussian(x,train_x_mean,train_x_sd)
+  newdata_probs_prod <- .univariate_pdf(x,train_x_mean,train_x_sd)
   if (type == 'class') {
     predictions <- as.numeric(newdata_probs_prod < epsilon)
     return(predictions)

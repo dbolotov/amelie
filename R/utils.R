@@ -2,7 +2,7 @@
 
 #'@importFrom stats dnorm na.omit model.extract model.matrix
 
-.univariate_gaussian <- function(x,x_mean,x_sd) {
+.univariate_pdf <- function(x,x_mean,x_sd) {
   probs <- rep(NA,NROW(x))
   for (r in 1:NROW(x)) {
     probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
@@ -10,7 +10,7 @@
   return(probs)
 }
 
-.multivariate_gaussian <- function(x,x_mean,x_sd) {
+.multivariate_pdf <- function(x,x_mean,x_sd) {
   probs <- rep(NA,NROW(x))
   n <- length(x_mean)
   x_sd_2 <- diag(x_sd^2)

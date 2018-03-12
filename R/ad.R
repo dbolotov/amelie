@@ -109,11 +109,11 @@ ad.default <- function(x, y, univariate = TRUE, na.action = na.omit, ...) {
 
   #compute product of probabilities on training set
   if (univariate == TRUE) {
-    train_x_probs_prod <- .univariate_gaussian(train_x,train_x_mean,train_x_sd)
-    val_x_probs_prod <- .univariate_gaussian(val_x,train_x_mean,train_x_sd)
+    train_x_probs_prod <- .univariate_pdf(train_x,train_x_mean,train_x_sd)
+    val_x_probs_prod <- .univariate_pdf(val_x,train_x_mean,train_x_sd)
   } else {
-    train_x_probs_prod <- .multivariate_gaussian(train_x,train_x_mean,train_x_sd)
-    val_x_probs_prod <- .multivariate_gaussian(val_x,train_x_mean,train_x_sd)
+    train_x_probs_prod <- .multivariate_pdf(train_x,train_x_mean,train_x_sd)
+    val_x_probs_prod <- .multivariate_pdf(val_x,train_x_mean,train_x_sd)
   }
   #optimize epsilon using validation set
   epsilon <- .op_epsilon(val_x_probs_prod,val_y)

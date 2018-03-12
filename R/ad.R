@@ -128,6 +128,7 @@ ad.default <- function(x, y, univariate = TRUE, na.action = na.omit, ...) {
   # create the return object
   call <- match.call()
   return_obj <- list(call = call,
+                     univariate = univariate,
                      epsilon = epsilon,
                      train_x_mean = train_x_mean,
                      train_x_sd = train_x_sd,

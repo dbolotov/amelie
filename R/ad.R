@@ -6,6 +6,7 @@
 #' @param x A matrix of numeric features.
 #' @param y A vector of numeric target values, either 0 or 1, with 1
 #' assumed to be anomalous.
+#' @param univariate Logical indicating whether the univariate pdf should be used.
 #' @param na.action A function specifying the action to be taken if NAs are
 #' found.
 #' @param ... Currently not used.

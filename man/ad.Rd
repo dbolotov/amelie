@@ -9,9 +9,10 @@
 \usage{
 ad(x, ...)
 
-\method{ad}{formula}(formula, data, na.action = na.omit, ...)
+\method{ad}{formula}(formula, data, univariate = TRUE, na.action = na.omit,
+  ...)
 
-\method{ad}{default}(x, y, na.action = na.omit, ...)
+\method{ad}{default}(x, y, univariate = TRUE, na.action = na.omit, ...)
 
 \method{print}{ad}(x, ...)
 }
@@ -24,6 +25,8 @@ ad(x, ...)
 model to be fitted.}
 
 \item{data}{A data frame containing the features (predictors) and target.}
+
+\item{univariate}{Logical indicating whether the univariate pdf should be used.}
 
 \item{na.action}{A function specifying the action to be taken if NAs are
 found.}

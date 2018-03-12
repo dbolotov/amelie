@@ -2,22 +2,15 @@
 % Please edit documentation in R/pdfunc.R
 \name{pdfunc}
 \alias{pdfunc}
-\title{pdfunc: compute probability density function.}
+\title{pdfunc: compute the probability density function.}
 \usage{
-pdfunc()
+pdfunc(x, univariate = TRUE)
 }
 \arguments{
-\item{data}{A data frame containing the features (predictors).}
-
 \item{x}{A matrix of numeric features.
 assumed to be anomalous.}
 
 \item{univariate}{Logical indicating whether the univariate pdf should be computed.}
-
-\item{na.action}{A function specifying the action to be taken if NAs are
-found.}
-
-\item{...}{Currently not used.}
 }
 \value{
 A list containing the following:
@@ -27,11 +20,8 @@ A list containing the following:
   \item{probs}{TODO}
 }
 \description{
-pdfunc: compute probability density function.
+pdfunc: compute the probability density function.
 }
 \details{
 \code{pdfunc} computes univariate or multivariate probabilities for a set of observations.
-}
-\references{
-\url{https://www.coursera.org/learn/machine-learning}
 }

@@ -5,9 +5,9 @@
 About
 -----
 
-`amelie` implements anomaly detection with maximum likelihood estimates and normal probability functions. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
+`amelie` implements anomaly detection with maximum likelihood estimates and normal probability density functions. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
 
-Current version: 0.0.1
+Current CRAN version: 0.0.1
 
 Installation
 ------------

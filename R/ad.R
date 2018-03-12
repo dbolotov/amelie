@@ -93,6 +93,9 @@ ad.formula <- function(formula, data, univariate = TRUE, na.action = na.omit, ..
 #' @export
 ad.default <- function(x, y, univariate = TRUE, na.action = na.omit, ...) {
 
+  #check univariate
+  if (!is.logical(univariate)) stop("univariate must be logical.")
+
   #check data
   .check_data(x,y)
 

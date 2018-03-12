@@ -5,7 +5,7 @@
 \alias{ad.formula}
 \alias{ad.default}
 \alias{print.ad}
-\title{ad: anomaly detection with normal probability functions.}
+\title{ad: anomaly detection with normal probability density functions.}
 \usage{
 ad(x, ...)
 
@@ -40,7 +40,7 @@ An object of class \code{ad}:
   \item{epsilon}{The threshold value.}
 }
 \description{
-ad: anomaly detection with normal probability functions.
+ad: anomaly detection with normal probability density functions.
 }
 \details{
 \code{amelie} implements anomaly detection with normal probability functions

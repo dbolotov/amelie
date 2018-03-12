@@ -2,6 +2,7 @@
 
 * Added a `NEWS.md` file.
 * Added multivariate option for probability density function.
+* Added pdfunc for computing density separately.
 
 # amelie 0.1.0
 

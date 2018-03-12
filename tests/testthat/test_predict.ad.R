@@ -21,7 +21,7 @@ names(dframe_test) <- c("x1","x2","y")
 
 test_that("fail when object does not inherit from ad", {
   a <- "a test string"
-  expect_error(predict.ad(a,iris),"Object not of class ad.")
+  expect_error(predict.ad(a,iris),"object not of class ad.")
 })
 
 test_that("fail when type is not class or prob", {

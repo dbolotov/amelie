@@ -14,11 +14,15 @@ Development version (this repository): 0.2.0
 Installation
 ------------
 
-``` r
-# Install from CRAN:
-install.packages("amelie")
+### Install from CRAN
 
-# Install latest changes from GitHub:
+``` r
+install.packages("amelie")
+```
+
+### Install latest changes from GitHub
+
+``` r
 # install.packages("devtools")
 devtools::install_github("dbolotov/amelie")
 ```

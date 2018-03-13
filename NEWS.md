@@ -1,4 +1,4 @@
-# amelie 0.2.0
+# amelie 0.2.0.9000
 
 * Added a `NEWS.md` file.
 * Added multivariate option for probability density function.

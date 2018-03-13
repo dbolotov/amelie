@@ -14,13 +14,13 @@ Development version (this repository): 0.2.0
 Installation
 ------------
 
-### Install from CRAN
+### Release from CRAN
 
 ``` r
 install.packages("amelie")
 ```
 
-### Install latest changes from GitHub
+### Latest changes from GitHub
 
 ``` r
 # install.packages("devtools")

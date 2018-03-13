@@ -32,12 +32,12 @@ Development version (this repository): 0.2.0
 
 ## Installation
 
-### Install from CRAN
+### Release from CRAN
 ```{r, eval = FALSE}
 install.packages("amelie")
 ```
 
-### Install latest changes from GitHub
+### Latest changes from GitHub
 ```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("dbolotov/amelie")

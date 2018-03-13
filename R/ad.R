@@ -13,7 +13,10 @@
 #'
 #' @return An object of class \code{ad}:
 #'   \item{call}{The original call to \code{ad}.}
+#'   \item{univariate}{Logical indicating which pdf was computed.}
 #'   \item{epsilon}{The threshold value.}
+#'   \item{train_x_mean}{Means of features in the training set.}
+#'   \item{train_x_sd}{Standard deviations of features in the training set.}
 #'
 #' @details
 #'
@@ -24,6 +27,9 @@
 #' on values of 0 (negative case, no anomaly) or 1 (positive case, anomaly).
 #'
 #' The threshold \code{epsilon} is optimized using the F1 score.
+#'
+#' Standard deviations are computed using \code{sd}, where denominator
+#' \code{n-1} is used (sample standard deviation).
 #'
 #' Algorithm details are described in the Introduction vignette.
 #'

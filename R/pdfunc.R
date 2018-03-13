@@ -5,15 +5,18 @@
 #' @param univariate Logical indicating whether the univariate pdf should be computed.
 #'
 #' @return A list containing the following:
-#'   \item{univariate}{TODO}
-#'   \item{x_mean}{TODO}
-#'   \item{x_sd}{TODO}
-#'   \item{probs}{TODO}
+#'   \item{univariate}{Logical indicating which pdf was computed.}
+#'   \item{x_mean}{Means of the features.}
+#'   \item{x_sd}{Standard deviations of the features.}
+#'   \item{probs}{values of the density function.}
 #'
 #' @details
 #'
 #' \code{pdfunc} computes univariate or multivariate probabilities for a set of observations.
-
+#'
+#' Standard deviations are computed using \code{sd}, where denominator
+#' \code{n-1} is used (sample standard deviation).
+#'
 #' @rdname pdfunc
 #' @export
 pdfunc <- function(x, univariate = TRUE) {

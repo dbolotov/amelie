@@ -13,11 +13,7 @@ assumed to be anomalous.}
 \item{univariate}{Logical indicating whether the univariate pdf should be computed.}
 }
 \value{
-A list containing the following:
-  \item{univariate}{Logical indicating which pdf was computed.}
-  \item{x_mean}{Means of the features.}
-  \item{x_sd}{Standard deviations of the features.}
-  \item{probs}{values of the density function.}
+A vector with values of the density function.
 }
 \description{
 pdfunc: compute the probability density function.

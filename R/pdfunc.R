@@ -4,11 +4,7 @@
 #' assumed to be anomalous.
 #' @param univariate Logical indicating whether the univariate pdf should be computed.
 #'
-#' @return A list containing the following:
-#'   \item{univariate}{Logical indicating which pdf was computed.}
-#'   \item{x_mean}{Means of the features.}
-#'   \item{x_sd}{Standard deviations of the features.}
-#'   \item{probs}{values of the density function.}
+#' @return A vector with values of the density function.
 #'
 #' @details
 #'

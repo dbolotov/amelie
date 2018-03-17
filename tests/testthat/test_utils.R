@@ -6,6 +6,15 @@ test_that("f1 score is calculated correctly", {
   expect_equal(.f1_score(c(1,1,1,1,0),c(0,0,1,1,0)),2/3)
 })
 
+test_that("matthews correlation coefficient is calculated correctly", {
+  expect_equal(.mcc(c(1,1,1),c(1,1,1)),0)
+  expect_equal(.mcc(c(1,1,1),c(0,0,1)),0)
+  expect_equal(.mcc(c(1,1,1,1,0),c(0,0,1,1,0)),0.4082483)
+  expect_equal(.mcc(c(0,0,1),c(0,0,1)),1)
+  expect_equal(.mcc(c(0,0,0),c(0,0,0)),0)
+  expect_equal(.mcc(c(1,1,1,1,0),c(0,0,0,0,1)),-1)
+})
+
 
 test_that(".mean2 is calculated correctly", {
   dmat <- matrix(c(1,2,1,4,3,5,2,1,3,2,1.1,2.2),nrow=4)
@@ -99,6 +108,7 @@ test_that("fail when x and y are of different lengths", {
                'x and y must have the same number of observations',
                fixed = TRUE)
 })
+
 
 
 # test_that("epsilon optimization works correctly", {

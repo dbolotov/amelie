@@ -39,7 +39,12 @@
   fn <- sum((y_hat==0) & (y==1))
   tn <- sum((y_hat==0) & (y==0))
 
-  return((tp*tn - fp*fn)/sqrt((tp+fp)*(tp+fn)(tn+fp)*(tn+fn)))
+  numer <- tp*tn - fp*fn
+  denom <- sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
+
+  if (denom == 0) denom <- 1
+
+  return(numer/denom)
 }
 
 .op_epsilon <- function(p_val,y_val) {

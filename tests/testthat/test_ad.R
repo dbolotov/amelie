@@ -19,7 +19,7 @@ test_that("class of fit object excludes formula when using default notation",{
 })
 
 
-test_that("fit is exactly the same for formula and matrix data",{
+test_that("fit is the same for formula and matrix data",{
   expect_identical(df_fit$epsilon,mat_fit$epsilon)
   expect_identical(df_fit$train_x_mean,mat_fit$train_x_mean)
   expect_identical(df_fit$train_x_sd,mat_fit$train_x_sd)
@@ -29,12 +29,12 @@ test_that("fit is exactly the same for formula and matrix data",{
 
 
 test_that("fit object contains required attributes", {
-  expect_equal(attributes(df_fit)$names,c("call", "univariate", "epsilon",
-                                          "train_x_mean", "train_x_sd",
-                                          "val_score", "terms"))
-  expect_equal(attributes(mat_fit)$names,c("call", "univariate", "epsilon",
-                                           "train_x_mean", "train_x_sd",
-                                           "val_score"))
+  expect_equal(attributes(df_fit)$names,c("call", "univariate", "score",
+                                          "epsilon", "train_x_mean",
+                                          "train_x_sd", "val_score", "terms"))
+  expect_equal(attributes(mat_fit)$names,c("call", "univariate", "score",
+                                           "epsilon", "train_x_mean",
+                                           "train_x_sd", "val_score"))
 })
 
 

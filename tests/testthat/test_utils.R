@@ -6,7 +6,7 @@ test_that("f1 score is calculated correctly", {
   expect_equal(.f1_score(c(1,1,1,1,0),c(0,0,1,1,0)),2/3)
 })
 
-test_that("matthews correlation coefficient is calculated correctly", {
+test_that("mcc is calculated correctly", {
   expect_equal(.mcc(c(1,1,1),c(1,1,1)),0)
   expect_equal(.mcc(c(1,1,1),c(0,0,1)),0)
   expect_equal(.mcc(c(1,1,1,1,0),c(0,0,1,1,0)),0.4082483)

@@ -9,10 +9,11 @@
 \usage{
 ad(x, ...)
 
-\method{ad}{formula}(formula, data, univariate = TRUE, na.action = na.omit,
-  ...)
+\method{ad}{formula}(formula, data, univariate = TRUE, score = "mcc",
+  na.action = na.omit, ...)
 
-\method{ad}{default}(x, y, univariate = TRUE, na.action = na.omit, ...)
+\method{ad}{default}(x, y, univariate = TRUE, score = "mcc",
+  na.action = na.omit, ...)
 
 \method{print}{ad}(x, ...)
 }
@@ -28,6 +29,9 @@ model to be fitted.}
 
 \item{univariate}{Logical indicating whether the univariate pdf should be used.}
 
+\item{score}{String indicating which score to use in optimization:
+\code{mcc} (default) or \code{f1}.}
+
 \item{na.action}{A function specifying the action to be taken if NAs are
 found.}
 
@@ -38,6 +42,7 @@ assumed to be anomalous.}
 An object of class \code{ad}:
   \item{call}{The original call to \code{ad}.}
   \item{univariate}{Logical indicating which pdf was computed.}
+  \item{score}{The score that was used for optimization.}
   \item{epsilon}{The threshold value.}
   \item{train_x_mean}{Means of features in the training set.}
   \item{train_x_sd}{Standard deviations of features in the training set.}
@@ -46,13 +51,15 @@ An object of class \code{ad}:
 ad: anomaly detection with normal probability density functions.
 }
 \details{
-\code{amelie} implements anomaly detection with normal probability functions
-and maximum likelihood estimates.
+\code{amelie} implements anomaly detection with normal probability
+functions and maximum likelihood estimates.
 
 Features are assumed to be continuous, and the target is assumed to take
-on values of 0 (negative case, no anomaly) or 1 (positive case, anomaly).
+on values of \code{0} (negative case, no anomaly) or \code{1} (positive
+case, anomaly).
 
-The threshold \code{epsilon} is optimized using the F1 score.
+The threshold \code{epsilon} is optimized using the either the Matthews
+correlation coefficient or F1 score.
 
 Standard deviations are computed using \code{sd}, where denominator
 \code{n-1} is used (sample standard deviation).
@@ -74,5 +81,7 @@ mat_fit <- ad(x = x, y = y)
 
 }
 \references{
-\url{https://www.coursera.org/learn/machine-learning}
+\href{https://www.coursera.org/learn/machine-learning}{Machine Learning Course}
+
+\href{https://en.wikipedia.org/wiki/Confusion_matrix}{Confusion matrix}
 }

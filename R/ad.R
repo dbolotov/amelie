@@ -7,6 +7,8 @@
 #' @param y A vector of numeric target values, either 0 or 1, with 1
 #' assumed to be anomalous.
 #' @param univariate Logical indicating whether the univariate pdf should be used.
+#' @param score String indicating which score to use in optimization:
+#' \code{mcc} (default) or \code{f1}.
 #' @param na.action A function specifying the action to be taken if NAs are
 #' found.
 #' @param ... Currently not used.
@@ -14,19 +16,22 @@
 #' @return An object of class \code{ad}:
 #'   \item{call}{The original call to \code{ad}.}
 #'   \item{univariate}{Logical indicating which pdf was computed.}
+#'   \item{score}{The score that was used for optimization.}
 #'   \item{epsilon}{The threshold value.}
 #'   \item{train_x_mean}{Means of features in the training set.}
 #'   \item{train_x_sd}{Standard deviations of features in the training set.}
 #'
 #' @details
 #'
-#' \code{amelie} implements anomaly detection with normal probability functions
-#' and maximum likelihood estimates.
+#' \code{amelie} implements anomaly detection with normal probability
+#' functions and maximum likelihood estimates.
 #'
 #' Features are assumed to be continuous, and the target is assumed to take
-#' on values of 0 (negative case, no anomaly) or 1 (positive case, anomaly).
+#' on values of \code{0} (negative case, no anomaly) or \code{1} (positive
+#' case, anomaly).
 #'
-#' The threshold \code{epsilon} is optimized using the F1 score.
+#' The threshold \code{epsilon} is optimized using the either the Matthews
+#' correlation coefficient or F1 score.
 #'
 #' Standard deviations are computed using \code{sd}, where denominator
 #' \code{n-1} is used (sample standard deviation).
@@ -37,7 +42,9 @@
 #' machine learning.
 #'
 #' @references
-#' \url{https://www.coursera.org/learn/machine-learning}
+#' \href{https://www.coursera.org/learn/machine-learning}{Machine learning course}
+#'
+#' \href{https://en.wikipedia.org/wiki/Confusion_matrix}{Confusion matrix}
 #'
 #' @examples
 #'
@@ -59,7 +66,8 @@ ad <- function(x, ...){
 
 #'@rdname ad
 #'@export
-ad.formula <- function(formula, data, univariate = TRUE, na.action = na.omit, ...) {
+ad.formula <- function(formula, data, univariate = TRUE,
+                       score = 'f1_score', na.action = na.omit, ...) {
   call <- match.call()
   if (!inherits(formula, "formula"))
     stop("method is only for formula objects")
@@ -83,7 +91,8 @@ ad.formula <- function(formula, data, univariate = TRUE, na.action = na.omit, ..
   y <- model.extract(m, "response")
   attr(x, "na.action") <- attr(y, "na.action") <- attr(m, "na.action")
 
-  return_object <- ad.default(x, y, univariate, na.action = na.action)
+  return_object <- ad.default(x, y, univariate, score,
+                              na.action = na.action)
   return_object$call <- call
   return_object$call[[1]] <- as.name("ad")
   return_object$terms <- Terms
@@ -97,15 +106,18 @@ ad.formula <- function(formula, data, univariate = TRUE, na.action = na.omit, ..
 
 #' @rdname ad
 #' @export
-ad.default <- function(x, y, univariate = TRUE, na.action = na.omit, ...) {
+ad.default <- function(x, y, univariate = TRUE,
+                       score = 'f1_score', na.action = na.omit, ...) {
 
-  #check univariate
+  # check score
+
+  # check univariate
   if (!is.logical(univariate)) stop("univariate must be logical.")
 
-  #check data
+  # check data
   .check_data(x,y)
 
-  #split data into training and cross-validation sets
+  # split data into training and cross-validation sets
   split_obj <- .split_data(x,y)
   train_x <- split_obj$train_x
   # train_y <- split_obj$train_y #not used, and always expected to be 0
@@ -113,11 +125,11 @@ ad.default <- function(x, y, univariate = TRUE, na.action = na.omit, ...) {
   val_y <- split_obj$val_y
 
 
-  #compute mean and variance of training set
+  # compute mean and variance of training set
   train_x_mean <- .mean2(train_x)
   train_x_sd <- .sd2(train_x)
 
-  #compute product of probabilities on training set
+  # compute product of probabilities on training set
   if (univariate == TRUE) {
     train_x_probs_prod <- .univariate_pdf(train_x,train_x_mean,train_x_sd)
     val_x_probs_prod <- .univariate_pdf(val_x,train_x_mean,train_x_sd)
@@ -125,20 +137,21 @@ ad.default <- function(x, y, univariate = TRUE, na.action = na.omit, ...) {
     train_x_probs_prod <- .multivariate_pdf(train_x,train_x_mean,train_x_sd)
     val_x_probs_prod <- .multivariate_pdf(val_x,train_x_mean,train_x_sd)
   }
-  #optimize epsilon using validation set
-  epsilon <- .op_epsilon(val_x_probs_prod,val_y)
+  # optimize epsilon using validation set
+  epsilon <- .op_epsilon(val_x_probs_prod, val_y, score)
 
-  #compute predictions on training set
+  # compute predictions on training set
   val_predictions <- as.numeric(val_x_probs_prod < epsilon)
 
-  #compute f1 score on validation set
-  val_score <- .f1_score(val_predictions, val_y)
+  # compute f1 score on validation set
+  val_score <- .score(val_predictions, val_y, score)
 
 
   # create the return object
   call <- match.call()
   return_obj <- list(call = call,
                      univariate = univariate,
+                     score = score,
                      epsilon = epsilon,
                      train_x_mean = train_x_mean,
                      train_x_sd = train_x_sd,

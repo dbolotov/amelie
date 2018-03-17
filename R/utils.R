@@ -47,31 +47,41 @@
   return(numer/denom)
 }
 
-.op_epsilon <- function(p_val,y_val) {
+.score <- function(y_hat, y, score_func) {
+  # call specified scoring function on y_hat and y
+
+  score_func <- get(paste(".",score_func, sep=""))
+  return(score_func(y_hat, y))
+}
+
+.op_epsilon <- function(p_val, y_val, score_func) {
   #p_val: probability values from validation set
   #y_val: target values from validation set
 
+  score_func <- get(paste(".",score_func, sep=""))
+
   best_epsilon <- 0
-  best_f1 <- 0
-  f1 <- 0
+  best_score <- 0
+  score <- 0
 
   step_size <- (max(p_val) - min(p_val)) / 100
 
-  # print(c("best_f1","f1","epsilon"))
+  # print(c("best_score","score","epsilon"))
   for (epsilon in seq(min(p_val),max(p_val),step_size)) {
 
-    predictions <- (p_val < epsilon) #? this makes it so predictions will be all 0 for 1st round of for loop
-    f1 <- .f1_score(predictions,y_val)
+    predictions <- (p_val < epsilon) #? this makes it so predictions
+    # will be all 0 for 1st round of for loop
+    score <- score_func(predictions,y_val)
 
-    # print(c(best_f1, f1, best_epsilon, epsilon))
+    # print(c(best_score, score, best_epsilon, epsilon))
 
+    if(is.nan(score)){score<-0}
+    # matlab/octave implementation will return 0 if comparing NaN with a
+    # number R will not.
 
-
-    if(is.nan(f1)){f1<-0} #matlab/octave implementation will return 0 if comparing Nan with a number. R will not.
-
-    if (f1 > best_f1) {
+    if (score > best_score) {
       # print('best')
-      best_f1 <- f1
+      best_score <- score
       best_epsilon <- epsilon
     }
   }

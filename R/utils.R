@@ -12,12 +12,12 @@
 
 .multivariate_pdf <- function(x,x_mean,x_sd) {
   probs <- rep(NA,NROW(x))
-  n <- length(x_mean)
+  n_means <- length(x_mean)
   x_sd_2 <- diag(x_sd^2)
 
   x_no_m <- as.matrix(sweep(x,2,x_mean))
 
-  probs <- ((2*pi)^(-n/2)) * ((det(x_sd_2))^(-0.5)) * exp(-0.5 * rowSums((x_no_m %*% solve(x_sd_2)) * x_no_m))
+  probs <- ((2*pi)^(-n_means/2)) * ((det(x_sd_2))^(-0.5)) * exp(-0.5 * rowSums((x_no_m %*% solve(x_sd_2)) * x_no_m))
   return(probs)
 }
 
@@ -55,8 +55,8 @@
 }
 
 .op_epsilon <- function(p_val, y_val, score_func) {
-  #p_val: probability values from validation set
-  #y_val: target values from validation set
+  # p_val: probability values from validation set
+  # y_val: target values from validation set
 
   score_func <- get(paste(".",score_func, sep=""))
 
@@ -89,22 +89,22 @@
 }
 
 .split_data <- function(x,y,random=TRUE,p=0.75){
-  #split data into training and validation sets
-  #validation must have posive examples, training set must have none
+  # split data into training and validation sets
+  # validation must have posive examples, training set must have none
 
-  #y: vector
-  #x: matrix
-  #p: ratio of the negative cases to use for training set
+  # y: vector
+  # x: matrix
+  # p: ratio of the negative cases to use for training set
 
-  #steps for random split:
-  #shufle rows in full data set
-  #separate into two sets, negatives and posives
-  #move all postives to val,
-  #split negatives between val and train sets
-  #shuffle val that now has positive and negative examples
+  # steps for random split:
+  # shufle rows in full data set
+  # separate into two sets, negatives and posives
+  # move all postives to val,
+  # split negatives between val and train sets
+  # shuffle val that now has positive and negative examples
 
-  #steps for non-random split:
-  #first part of p goes to train, second part goes to val
+  # steps for non-random split:
+  # first part of p goes to train, second part goes to val
 
 
   # print(random)

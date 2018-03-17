@@ -15,6 +15,13 @@ test_that("mcc is calculated correctly", {
   expect_equal(.mcc(c(1,1,1,1,0),c(0,0,0,0,1)),-1)
 })
 
+test_that(".score is calculated correctly", {
+  expect_equal(.score(c(1,1,1,1,0),c(0,0,1,1,0),"f1_score"),
+               .f1_score(c(1,1,1,1,0),c(0,0,1,1,0)))
+  expect_equal(.score(c(1,1,1,1,0),c(0,0,1,1,0),"mcc"),
+               .mcc(c(1,1,1,1,0),c(0,0,1,1,0)))
+})
+
 
 test_that(".mean2 is calculated correctly", {
   dmat <- matrix(c(1,2,1,4,3,5,2,1,3,2,1.1,2.2),nrow=4)

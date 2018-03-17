@@ -83,7 +83,7 @@ test_that("NAs are treated correctly", {
 })
 
 
-test_that("fit object is printed with call and epsilon",{
+test_that("fit object is printed with call and epsilon", {
   set.seed(321)
   x1 <- c(0,.2,3,1,1,-.8,-2,-1)
   x2 <- c(1,.2,0.4,-3,0,-1,-.3,-.1)
@@ -96,10 +96,19 @@ test_that("fit object is printed with call and epsilon",{
   expect_output(print(df_fit),"Call:\nad(formula = y ~ x1 + x2, data = dframe)\n\nepsilon: 0.0009140219", fixed = TRUE)
 })
 
-test_that("no errors when calling with univariate argument",{
+test_that("no errors when calling with univariate argument", {
   expect_silent(ad(y ~ x1 + x2, data = dframe, univariate = TRUE))
   expect_silent(ad(x = x, y = y, univariate = TRUE))
   expect_silent(ad(y ~ x1 + x2, data = dframe, univariate = FALSE))
   expect_silent(ad(x = x, y = y, univariate = FALSE))
 })
+
+test_that("ad matches expected values", {
+  skip("skip for now")
+  expect_equal(df_fit$train_x_mean,0)
+  expect_equal(df_fit$train_x_sd,0)
+  expect_equal(df_fit$epsilon,0)
+  expect_equal(df_fit$val_score,0)
+})
+
 

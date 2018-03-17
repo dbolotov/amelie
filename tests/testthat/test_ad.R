@@ -95,3 +95,11 @@ test_that("fit object is printed with call and epsilon",{
 
   expect_output(print(df_fit),"Call:\nad(formula = y ~ x1 + x2, data = dframe)\n\nepsilon: 0.0009140219", fixed = TRUE)
 })
+
+test_that("no errors when calling with univariate argument",{
+  expect_silent(ad(y ~ x1 + x2, data = dframe, univariate = TRUE))
+  expect_silent(ad(x = x, y = y, univariate = TRUE))
+  expect_silent(ad(y ~ x1 + x2, data = dframe, univariate = FALSE))
+  expect_silent(ad(x = x, y = y, univariate = FALSE))
+})
+

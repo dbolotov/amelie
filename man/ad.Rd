@@ -9,34 +9,32 @@
 \usage{
 ad(x, ...)
 
-\method{ad}{formula}(formula, data, univariate = TRUE, score = "mcc",
-  na.action = na.omit, ...)
+\method{ad}{formula}(formula, data, na.action = na.omit, ...)
 
-\method{ad}{default}(x, y, univariate = TRUE, score = "mcc",
-  na.action = na.omit, ...)
+\method{ad}{default}(x, y, univariate = TRUE, score = "f1_score", ...)
 
 \method{print}{ad}(x, ...)
 }
 \arguments{
 \item{x}{A matrix of numeric features.}
 
-\item{...}{Currently not used.}
+\item{...}{Optional parameters to be passed to ad.default.}
 
 \item{formula}{An object of class "formula": a symbolic description of the
 model to be fitted.}
 
 \item{data}{A data frame containing the features (predictors) and target.}
 
-\item{univariate}{Logical indicating whether the univariate pdf should be used.}
-
-\item{score}{String indicating which score to use in optimization:
-\code{mcc} (default) or \code{f1}.}
-
 \item{na.action}{A function specifying the action to be taken if NAs are
 found.}
 
 \item{y}{A vector of numeric target values, either 0 or 1, with 1
 assumed to be anomalous.}
+
+\item{univariate}{Logical indicating whether the univariate pdf should be used.}
+
+\item{score}{String indicating which score to use in optimization:
+\code{mcc} (default) or \code{f1}.}
 }
 \value{
 An object of class \code{ad}:
@@ -81,7 +79,7 @@ mat_fit <- ad(x = x, y = y)
 
 }
 \references{
-\href{https://www.coursera.org/learn/machine-learning}{Machine Learning Course}
+\href{https://www.coursera.org/learn/machine-learning}{Machine learning course}
 
 \href{https://en.wikipedia.org/wiki/Confusion_matrix}{Confusion matrix}
 }

@@ -11,7 +11,7 @@
 #' \code{mcc} (default) or \code{f1}.
 #' @param na.action A function specifying the action to be taken if NAs are
 #' found.
-#' @param ... Currently not used.
+#' @param ... Optional parameters to be passed to ad.default.
 #'
 #' @return An object of class \code{ad}:
 #'   \item{call}{The original call to \code{ad}.}
@@ -66,24 +66,27 @@ ad <- function(x, ...){
 
 #'@rdname ad
 #'@export
-ad.formula <- function(formula, data, univariate = TRUE,
-                       score = 'f1_score', na.action = na.omit, ...) {
+ad.formula <- function(formula, data, na.action = na.omit, ...) {
   call <- match.call()
   if (!inherits(formula, "formula"))
-    stop("method is only for formula objects")
+    stop("Method is only for formula objects.")
 
   if (!all(sapply(data,is.numeric))) {
     stop("Both x and y must be numeric.")
   }
 
   m <- match.call(expand.dots = FALSE)
+
   if (identical(class(eval.parent(m$data)), "matrix"))
     m$data <- as.data.frame(eval.parent(m$data))
+
+  m$... <- NULL
 
   m[[1L]] <- quote(stats::model.frame)
   m$na.action <- na.action
 
   m <- eval(m, parent.frame())
+
   Terms <- attr(m, "terms")
   attr(Terms, "intercept") <- 0
 
@@ -91,8 +94,7 @@ ad.formula <- function(formula, data, univariate = TRUE,
   y <- model.extract(m, "response")
   attr(x, "na.action") <- attr(y, "na.action") <- attr(m, "na.action")
 
-  return_object <- ad.default(x, y, univariate, score,
-                              na.action = na.action)
+  return_object <- ad.default(x, y, ...)
   return_object$call <- call
   return_object$call[[1]] <- as.name("ad")
   return_object$terms <- Terms
@@ -106,8 +108,7 @@ ad.formula <- function(formula, data, univariate = TRUE,
 
 #' @rdname ad
 #' @export
-ad.default <- function(x, y, univariate = TRUE,
-                       score = 'f1_score', na.action = na.omit, ...) {
+ad.default <- function(x, y, univariate = TRUE, score = 'f1_score', ...) {
 
   # check score
 

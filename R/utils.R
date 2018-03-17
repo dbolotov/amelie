@@ -22,7 +22,7 @@
 }
 
 
-.f1_score <- function(y_hat,y) {
+.f1_score <- function(y_hat, y) {
   #assumes that "1" is the positive result
   tp <- sum((y_hat==1) & (y==1))
   fp <- sum((y_hat==1) & (y==0))
@@ -30,6 +30,16 @@
   precision <- tp / (tp + fp)
   recall <- tp / (tp + fn)
   return(2*precision*recall/(precision+recall))
+}
+
+.mcc <- function(y_hat, y) {
+  #assumes that "1" is the positive result
+  tp <- sum((y_hat==1) & (y==1))
+  fp <- sum((y_hat==1) & (y==0))
+  fn <- sum((y_hat==0) & (y==1))
+  tn <- sum((y_hat==0) & (y==0))
+
+  return((tp*tn - fp*fn)/sqrt((tp+fp)*(tp+fn)(tn+fp)*(tn+fn)))
 }
 
 .op_epsilon <- function(p_val,y_val) {

@@ -8,7 +8,7 @@
 #' assumed to be anomalous.
 #' @param univariate Logical indicating whether the univariate pdf should be used.
 #' @param score String indicating which score to use in optimization:
-#' \code{mcc} (default) or \code{f1}.
+#' \code{f1} (default) or \code{mcc}.
 #' @param na.action A function specifying the action to be taken if NAs are
 #' found.
 #' @param ... Optional parameters to be passed to ad.default.
@@ -108,7 +108,7 @@ ad.formula <- function(formula, data, na.action = na.omit, ...) {
 
 #' @rdname ad
 #' @export
-ad.default <- function(x, y, univariate = TRUE, score = 'f1_score', ...) {
+ad.default <- function(x, y, univariate = TRUE, score = 'f1', ...) {
 
   # check score
 

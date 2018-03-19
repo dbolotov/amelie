@@ -58,8 +58,8 @@ Using the above assumptions and definitions, the algorithm is implemented as fol
     a. Pick starting value for $\epsilon$.
     b. Calculate $p(x)_{cv}$ for each row in CV set using $\mu$ and $\sigma^2$ from `step 2`.
     c. For each row $i$ in CV set, predict $y = 1$ if $p(x_i) < \epsilon$ (anomaly), else predict $y=0$.
-    d. Evaluate prediction accuracy on CV set using F1 score.
-    e. Update $\epsilon$ if F1 score improves. 
+    d. Evaluate prediction accuracy on CV set using a score (e.g., f1).
+    e. Update $\epsilon$ if the score improves. 
     f. Stop when best $\epsilon$ value is found.
 4. Evaluate algorithm accuracy on the training set.
     - Use $p(x)_{train}$ from `step 2` and $\epsilon$ from `step 3`.

@@ -22,7 +22,7 @@
 }
 
 
-.f1_score <- function(y_hat, y) {
+.f1 <- function(y_hat, y) {
   #assumes that "1" is the positive result
   tp <- sum((y_hat==1) & (y==1))
   fp <- sum((y_hat==1) & (y==0))

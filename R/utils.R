@@ -23,7 +23,7 @@
 
 
 .f1 <- function(y_hat, y) {
-  #assumes that "1" is the positive result
+  # assumes that "1" is the positive result
   tp <- sum((y_hat==1) & (y==1))
   fp <- sum((y_hat==1) & (y==0))
   fn <- sum((y_hat==0) & (y==1))
@@ -33,7 +33,7 @@
 }
 
 .mcc <- function(y_hat, y) {
-  #assumes that "1" is the positive result
+  # assumes that "1" is the positive result
   tp <- sum((y_hat==1) & (y==1))
   fp <- sum((y_hat==1) & (y==0))
   fn <- sum((y_hat==0) & (y==1))
@@ -64,23 +64,19 @@
   best_score <- 0
   score <- 0
 
-  step_size <- (max(p_val) - min(p_val)) / 100
+  step_size <- (max(p_val) - min(p_val)) / 1000
 
-  # print(c("best_score","score","epsilon"))
   for (epsilon in seq(min(p_val),max(p_val),step_size)) {
 
     predictions <- (p_val < epsilon) #? this makes it so predictions
     # will be all 0 for 1st round of for loop
     score <- score_func(predictions,y_val)
 
-    # print(c(best_score, score, best_epsilon, epsilon))
-
     if(is.nan(score)){score<-0}
     # matlab/octave implementation will return 0 if comparing NaN with a
     # number R will not.
 
     if (score > best_score) {
-      # print('best')
       best_score <- score
       best_epsilon <- epsilon
     }
@@ -133,7 +129,7 @@
   }
 
   else if (random==FALSE) {
-    #non-randomly split data into training and validation sets, regardless of class
+    # non-randomly split data into training and validation sets, regardless of class
     split_point <- floor((length(y))*p)
 
     train_x <- x[1:split_point,]
@@ -156,29 +152,29 @@
 }
 
 .sd2 <- function(x) {
-  #using sample standard deviation
+  # using sample standard deviation
   return(unname(apply(x,2,sd)))
 }
 
 .check_data <- function(x, y) {
-  #check x and y for problems
+  # check x and y for problems
 
-  #check that x and y are same length
+  # check that x and y are same length
   if (NROW(x) != length(y)) {
     stop("x and y must have the same number of observations.")
   }
 
-  #check that x and y are numeric
+  # check that x and y are numeric
   if ((!is.numeric(x)) | (!is.numeric(y))) {
     stop("Both x and y must be numeric.")
   }
 
-  #check that y only contains 0 and 1, and that y contains both kinds of examples
+  # check that y only contains 0 and 1, and that y contains both kinds of examples
   if (!identical(sort(unique(y)),c(0,1))) {
     stop("y must contain only 0 and 1, and both classes must be represented (normal = 0, anomaly = 1).")
   }
 
-  #check that x and y don't contain NA
+  # check that x and y don't contain NA
   if ((any(is.na(x))) | (any(is.na(y)))) {
     stop("NAs currently not supported.")
   }

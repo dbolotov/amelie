@@ -112,3 +112,16 @@ test_that("ad matches expected values", {
 })
 
 
+test_that("fail when score is not one of expected strings", {
+  expect_error(ad(y ~ x1+x2, dframe, score = "foo"),
+               "score must be one of 'f1' or 'mcc'.", fixed = TRUE)
+  expect_error(ad(x, y, score = "bar"),
+               "score must be one of 'f1' or 'mcc'.", fixed = TRUE)
+})
+
+test_that("fail when univariate is not logical", {
+  expect_error(ad(y ~ x1+x2, dframe, univariate = 'foo'),
+               "univariate must be logical.", fixed = TRUE)
+  expect_error(ad(y ~ x1+x2, dframe, univariate = 3),
+               "univariate must be logical.", fixed = TRUE)
+})

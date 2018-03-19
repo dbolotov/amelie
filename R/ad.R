@@ -111,6 +111,7 @@ ad.formula <- function(formula, data, na.action = na.omit, ...) {
 ad.default <- function(x, y, univariate = TRUE, score = 'f1', ...) {
 
   # check score
+  if (!score %in% c('f1','mcc')) stop ("score must be one of 'f1' or 'mcc'.")
 
   # check univariate
   if (!is.logical(univariate)) stop("univariate must be logical.")

@@ -79,21 +79,27 @@ test_that("NAs are treated correctly", {
   set.seed(142)
   df_fit <- ad(y ~ x1 + x2, dframe)
   expect_equal(df_fit$train_x_mean,c(1.966667,1.466667), tolerance = 0.00001)
-  expect_equal(df_fit$epsilon,0.004755208)
+  expect_equal(df_fit$epsilon,0.004203277)
 })
 
 
 test_that("fit object is printed with call and epsilon", {
-  set.seed(321)
   x1 <- c(0,.2,3,1,1,-.8,-2,-1)
   x2 <- c(1,.2,0.4,-3,0,-1,-.3,-.1)
   x <- do.call(cbind,list(x1,x2))
   y <- c(0,0,0,0,0,1,1,1)
   dframe <- data.frame(x,y)
+  set.seed(321)
   df_fit <- ad(y ~ x1 + x2, dframe)
+  set.seed(321)
   mat_fit <- ad(x = x, y = y)
 
-  expect_output(print(df_fit),"Call:\nad(formula = y ~ x1 + x2, data = dframe)\n\nepsilon: 0.0009140219", fixed = TRUE)
+  expect_output(print(df_fit),
+                "Call:\nad(formula = y ~ x1 + x2, data = dframe)\n\nepsilon: 0.0007921529",
+                fixed = TRUE)
+  expect_output(print(mat_fit),
+                "Call:\nad.default(x = x, y = y)\n\nepsilon: 0.0007921529",
+                fixed = TRUE)
 })
 
 test_that("no errors when calling with univariate argument", {

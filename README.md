@@ -41,7 +41,7 @@ dframe <- data.frame(x,y)
 df_fit <- ad(y ~ x1 + x2, dframe)
 ```
 
-Vignette
---------
+Documentation
+-------------
 
-[Introduction](https://cran.r-project.org/web/packages/amelie/vignettes/amelie-introduction.html) vignette for a description of the algorithm.
+[Introduction vignette](https://cran.r-project.org/web/packages/amelie/vignettes/amelie-introduction.html) for a description of the algorithm. [Package site](https://dbolotov.github.io/amelie/) for package documentation (built with `pkgdown`).

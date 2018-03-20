@@ -11,7 +11,7 @@ ad(x, ...)
 
 \method{ad}{formula}(formula, data, na.action = na.omit, ...)
 
-\method{ad}{default}(x, y, univariate = TRUE, score = "f1_score", ...)
+\method{ad}{default}(x, y, univariate = TRUE, score = "f1", ...)
 
 \method{print}{ad}(x, ...)
 }
@@ -34,7 +34,7 @@ assumed to be anomalous.}
 \item{univariate}{Logical indicating whether the univariate pdf should be used.}
 
 \item{score}{String indicating which score to use in optimization:
-\code{mcc} (default) or \code{f1}.}
+\code{f1} (default) or \code{mcc}.}
 }
 \value{
 An object of class \code{ad}:

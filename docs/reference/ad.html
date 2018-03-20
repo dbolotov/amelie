@@ -106,11 +106,10 @@
     <pre class="usage"><span class='fu'>ad</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for formula</span>
-<span class='fu'>ad</span>(<span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>univariate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.action</span> <span class='kw'>=</span> <span class='no'>na.omit</span>,
-  <span class='no'>...</span>)
+<span class='fu'>ad</span>(<span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>na.action</span> <span class='kw'>=</span> <span class='no'>na.omit</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>ad</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>univariate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.action</span> <span class='kw'>=</span> <span class='no'>na.omit</span>, <span class='no'>...</span>)
+<span class='fu'>ad</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>univariate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>score</span> <span class='kw'>=</span> <span class='st'>"f1"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ad</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -124,7 +123,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Currently not used.</p></td>
+      <td><p>Optional parameters to be passed to ad.default.</p></td>
     </tr>
     <tr>
       <th>formula</th>
@@ -136,10 +135,6 @@ model to be fitted.</p></td>
       <td><p>A data frame containing the features (predictors) and target.</p></td>
     </tr>
     <tr>
-      <th>univariate</th>
-      <td><p>Logical indicating whether the univariate pdf should be used.</p></td>
-    </tr>
-    <tr>
       <th>na.action</th>
       <td><p>A function specifying the action to be taken if NAs are
 found.</p></td>
@@ -149,29 +144,47 @@ found.</p></td>
       <td><p>A vector of numeric target values, either 0 or 1, with 1
 assumed to be anomalous.</p></td>
     </tr>
+    <tr>
+      <th>univariate</th>
+      <td><p>Logical indicating whether the univariate pdf should be used.</p></td>
+    </tr>
+    <tr>
+      <th>score</th>
+      <td><p>String indicating which score to use in optimization:
+<code>f1</code> (default) or <code>mcc</code>.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code>ad</code>:</p>
 <dt>call</dt><dd><p>The original call to <code>ad</code>.</p></dd>
+  <dt>univariate</dt><dd><p>Logical indicating which pdf was computed.</p></dd>
+  <dt>score</dt><dd><p>The score that was used for optimization.</p></dd>
   <dt>epsilon</dt><dd><p>The threshold value.</p></dd>
+  <dt>train_x_mean</dt><dd><p>Means of features in the training set.</p></dd>
+  <dt>train_x_sd</dt><dd><p>Standard deviations of features in the training set.</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>amelie</code> implements anomaly detection with normal probability functions
-and maximum likelihood estimates.</p>
+    <p><code>amelie</code> implements anomaly detection with normal probability
+functions and maximum likelihood estimates.</p>
 <p>Features are assumed to be continuous, and the target is assumed to take
-on values of 0 (negative case, no anomaly) or 1 (positive case, anomaly).</p>
-<p>The threshold <code>epsilon</code> is optimized using the F1 score.</p>
+on values of <code>0</code> (negative case, no anomaly) or <code>1</code> (positive
+case, anomaly).</p>
+<p>The threshold <code>epsilon</code> is optimized using the either the Matthews
+correlation coefficient or F1 score.</p>
+<p>Standard deviations are computed using <code>sd</code>, where denominator
+<code>n-1</code> is used (sample standard deviation).</p>
 <p>Algorithm details are described in the Introduction vignette.</p>
 <p>The package follows the anomaly detection approach in Andrew Ng's course on
 machine learning.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://www.coursera.org/learn/machine-learning'>https://www.coursera.org/learn/machine-learning</a></p>
+    <p><a href='https://www.coursera.org/learn/machine-learning'>Machine learning course</a>
+    <a href='https://en.wikipedia.org/wiki/Confusion_matrix'>Confusion matrix</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

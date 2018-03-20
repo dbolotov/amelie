@@ -131,8 +131,8 @@
 <li>Pick starting value for <span class="math inline">\(\epsilon\)</span>.</li>
 <li>Calculate <span class="math inline">\(p(x)_{cv}\)</span> for each row in CV set using <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> from <code>step 2</code>.</li>
 <li>For each row <span class="math inline">\(i\)</span> in CV set, predict <span class="math inline">\(y = 1\)</span> if <span class="math inline">\(p(x_i) &lt; \epsilon\)</span> (anomaly), else predict <span class="math inline">\(y=0\)</span>.</li>
-<li>Evaluate prediction accuracy on CV set using F1 score.</li>
-<li>Update <span class="math inline">\(\epsilon\)</span> if F1 score improves.</li>
+<li>Evaluate prediction accuracy on CV set using a score (e.g., f1).</li>
+<li>Update <span class="math inline">\(\epsilon\)</span> if the score improves.</li>
 <li>Stop when best <span class="math inline">\(\epsilon\)</span> value is found.</li>
 </ol>
 </li>

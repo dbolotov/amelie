@@ -1,7 +1,6 @@
-#' pdfunc: compute the probability density function.
+#' Compute the probability density function of a matrix of features.
 #'
 #' @param x A matrix of numeric features.
-#' assumed to be anomalous.
 #' @param univariate Logical indicating whether the univariate pdf should be computed.
 #'
 #' @return A vector with values of the density function.
@@ -12,6 +11,10 @@
 #'
 #' Standard deviations are computed using \code{sd}, where denominator
 #' \code{n-1} is used (sample standard deviation).
+#'
+#' @examples
+#' dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
+#' pdfunc(dmat,TRUE)
 #'
 #' @rdname pdfunc
 #' @export

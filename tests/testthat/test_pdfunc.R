@@ -20,8 +20,3 @@ test_that("pdfunc result is different for multv and univ", {
   dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
   expect_false(isTRUE(all.equal(pdfunc(dmat,TRUE),pdfunc(dmat,FALSE),tolerance=1.0e-20)))
 })
-
-
-# test_that("pdfunc result is different for multv and univ", {
-#   dmat <- matrix(c(3,NA,3,1,2,3,-1,0),nrow=2)
-# })

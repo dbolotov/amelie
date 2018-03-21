@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>pdfunc: compute the probability density function. — pdfunc • amelie</title>
+<title>Compute the probability density function of a matrix of features. — pdfunc • amelie</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="pdfunc: compute the probability density function. — pdfunc" />
+<meta property="og:title" content="Compute the probability density function of a matrix of features. — pdfunc" />
 
-<meta property="og:description" content="pdfunc: compute the probability density function." />
+<meta property="og:description" content="Compute the probability density function of a matrix of features." />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -96,11 +96,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>pdfunc: compute the probability density function.</h1>
+    <h1>Compute the probability density function of a matrix of features.</h1>
     </div>
 
     
-    <p>pdfunc: compute the probability density function.</p>
+    <p>Compute the probability density function of a matrix of features.</p>
     
 
     <pre class="usage"><span class='fu'>pdfunc</span>(<span class='no'>x</span>, <span class='kw'>univariate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
@@ -110,8 +110,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A matrix of numeric features.
-assumed to be anomalous.</p></td>
+      <td><p>A matrix of numeric features.</p></td>
     </tr>
     <tr>
       <th>univariate</th>
@@ -130,6 +129,10 @@ assumed to be anomalous.</p></td>
 <code>n-1</code> is used (sample standard deviation).</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>dmat</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>c</span>(<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,-<span class='fl'>1</span>,<span class='fl'>0</span>),<span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>2</span>)
+<span class='fu'>pdfunc</span>(<span class='no'>dmat</span>,<span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 0.009318495 0.009318495</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -139,7 +142,9 @@ assumed to be anomalous.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

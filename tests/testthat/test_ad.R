@@ -9,6 +9,11 @@ set.seed(1234)
 df_fit_0 <- ad(y_0 ~ x1_0 + x2_0, dframe_0)
 set.seed(1234)
 mat_fit_0 <- ad(x = x_0, y = y_0)
+set.seed(1234)
+df_fit_1 <- ad(y_0 ~ x1_0 + x2_0, dframe_0, univariate = FALSE)
+set.seed(1234)
+mat_fit_1 <- ad(x = x_0, y = y_0, univariate = FALSE)
+
 
 test_that("class of fit object excludes formula when using default notation",{
   expect_identical(class(df_fit_0),c("ad.formula","ad"))
@@ -123,10 +128,27 @@ test_that("fail when univariate is not logical", {
                "univariate must be logical.", fixed = TRUE)
 })
 
-test_that("ad matches expected values", {
+test_that("ad matches expected values for univar", {
   expect_equal(df_fit_0$train_x_mean,c(0.925, 0.350))
   expect_equal(df_fit_0$train_x_sd,c(0.1500000000, 0.4725815626))
   expect_equal(df_fit_0$epsilon,1.805404e-08)
   expect_equal(df_fit_0$val_score,0.8)
+
+  expect_equal(mat_fit_0$train_x_mean,c(0.925, 0.350))
+  expect_equal(mat_fit_0$train_x_sd,c(0.1500000000, 0.4725815626))
+  expect_equal(mat_fit_0$epsilon,1.805404e-08)
+  expect_equal(mat_fit_0$val_score,0.8)
+})
+
+test_that("ad matches expected values for multivar", {
+  expect_equal(df_fit_1$train_x_mean,c(0.925, 0.350))
+  expect_equal(df_fit_1$train_x_sd,c(0.1500000000, 0.4725815626))
+  expect_equal(df_fit_1$epsilon,1.805404e-08)
+  expect_equal(df_fit_1$val_score,0.8)
+
+  expect_equal(mat_fit_1$train_x_mean,c(0.925, 0.350))
+  expect_equal(mat_fit_1$train_x_sd,c(0.1500000000, 0.4725815626))
+  expect_equal(mat_fit_1$epsilon,1.805404e-08)
+  expect_equal(mat_fit_1$val_score,0.8)
 })
 

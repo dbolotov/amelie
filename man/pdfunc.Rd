@@ -20,6 +20,8 @@ Compute the probability density function of a matrix of features.
 \details{
 \code{pdfunc} computes univariate or multivariate probabilities for a set of observations.
 
+All columns of a row are used in computing the pdf.
+
 Standard deviations are computed using \code{sd}, where denominator
 \code{n-1} is used (sample standard deviation).
 }

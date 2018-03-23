@@ -55,7 +55,7 @@ Using the above assumptions and definitions, the algorithm is implemented as fol
     a. Fit parameters $\mu$ and $\sigma^2$ for each feature.
     b. Calculate $p(x)_{train}$ for each row in training set.
 3. Tune $\epsilon$ on cross-validation data set.
-    a. Pick starting value for $\epsilon$.
+    a. Pick starting value for $\epsilon$; $min(p(x)_{train})$ is used here.
     b. Calculate $p(x)_{cv}$ for each row in CV set using $\mu$ and $\sigma^2$ from `step 2`.
     c. For each row $i$ in CV set, predict $y = 1$ if $p(x_i) < \epsilon$ (anomaly), else predict $y=0$.
     d. Evaluate prediction accuracy on CV set using a score (e.g., f1).
@@ -67,15 +67,18 @@ Using the above assumptions and definitions, the algorithm is implemented as fol
     - Compute $p(x_i)_{test}$ using $\mu$ and $\sigma^2$ from `step 2` and $\epsilon$ from `step 3`.
 
 
-### Extending the univariate anomaly detection algorithm
+### Multivariate anomaly detection algorithm
 
-It is possible to extend the above algorithm by using multivariate version of the normal distribution. In this case, the features are not assumed to be independent, and $p$ is not a product of independent densities.
+It is possible to extend the above algorithm by using the multivariate version of the normal distribution. In this case, the features are not assumed to be independent, and $p$ is not a product of independent densities.
 
-#### Multivariate normal distribution
+For parameters $\mu \in R^n$ (vector of means) and $\Sigma \in R^{n * n}$ (covariance matrix), the multivariate probability density function is given by:
 
-For parameters $\mu \in R^n$ and $\Sigma \in R^{n * n}$, the multivariate probability density function is given by:
+$$p(x; \mu, \Sigma) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}e^{(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))},$$
+Where $|\Sigma|$ is the determinant of $\Sigma$.
 
-$$p(x; \mu, \Sigma) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}e^{(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))}$$
+Unlike the univariate version, the multivariate pdf approach automatically captures correlations between features. However, the latter approach is computationally more expensive due to having to compute the inverse of $\Sigma$. The univariate algorithm works even when the training set size is small. For the multivariate version, $\Sigma$ is non-invertible if the number of observations is smaller than the number of features or the data contains features that are linearly dependent on others.
+
+
 
 ### Examples
 

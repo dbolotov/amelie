@@ -47,6 +47,8 @@ An object of class \code{ad}:
   \item{epsilon}{The threshold value.}
   \item{train_x_mean}{Means of features in the training set.}
   \item{train_x_sd}{Standard deviations of features in the training set.}
+  \item{val_score}{The score obtained on the validation data set.
+  0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient}
 }
 \description{
 ad: anomaly detection with normal probability density functions.
@@ -85,4 +87,6 @@ mat_fit <- ad(x = x, y = y)
 \href{https://www.coursera.org/learn/machine-learning}{Machine learning course}
 
 \href{https://en.wikipedia.org/wiki/Confusion_matrix}{Confusion matrix}
+
+\href{https://en.wikipedia.org/wiki/Matthews_correlation_coefficient}{Matthews correlation coefficient}
 }

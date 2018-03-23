@@ -9,6 +9,7 @@
 #' @param univariate Logical indicating whether the univariate pdf should be used.
 #' @param score String indicating which score to use in optimization:
 #' \code{f1} (default) or \code{mcc}.
+#' @param steps Integer number of steps to take during epsilon optimization.
 #' @param na.action A function specifying the action to be taken if NAs are
 #' found.
 #' @param ... Optional parameters to be passed to ad.default.
@@ -108,7 +109,9 @@ ad.formula <- function(formula, data, na.action = na.omit, ...) {
 
 #' @rdname ad
 #' @export
-ad.default <- function(x, y, univariate = TRUE, score = 'f1', ...) {
+ad.default <- function(x, y, univariate = TRUE,
+                       score = 'f1',
+                       steps = 1e3, ...) {
 
   # check score
   if (!score %in% c('f1','mcc')) stop ("score must be one of 'f1' or 'mcc'.")
@@ -140,7 +143,7 @@ ad.default <- function(x, y, univariate = TRUE, score = 'f1', ...) {
     val_x_probs_prod <- .multivariate_pdf(val_x,train_x_mean,train_x_sd)
   }
   # optimize epsilon using validation set
-  epsilon <- .op_epsilon(val_x_probs_prod, val_y, score)
+  epsilon <- .op_epsilon(val_x_probs_prod, val_y, score, steps)
 
   # compute predictions on training set
   val_predictions <- as.numeric(val_x_probs_prod < epsilon)

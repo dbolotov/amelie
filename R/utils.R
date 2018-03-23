@@ -54,7 +54,7 @@
   return(score_func(y_hat, y))
 }
 
-.op_epsilon <- function(p_val, y_val, score_func) {
+.op_epsilon <- function(p_val, y_val, score_func, steps) {
   # p_val: probability values from validation set
   # y_val: target values from validation set
 
@@ -64,7 +64,7 @@
   best_score <- 0
   score <- 0
 
-  step_size <- (max(p_val) - min(p_val)) / 1000
+  step_size <- (max(p_val) - min(p_val)) / steps
 
   for (epsilon in seq(min(p_val),max(p_val),step_size)) {
 

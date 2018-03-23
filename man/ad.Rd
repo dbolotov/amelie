@@ -11,7 +11,8 @@ ad(x, ...)
 
 \method{ad}{formula}(formula, data, na.action = na.omit, ...)
 
-\method{ad}{default}(x, y, univariate = TRUE, score = "f1", ...)
+\method{ad}{default}(x, y, univariate = TRUE, score = "f1", steps = 1000,
+  ...)
 
 \method{print}{ad}(x, ...)
 }
@@ -35,6 +36,8 @@ assumed to be anomalous.}
 
 \item{score}{String indicating which score to use in optimization:
 \code{f1} (default) or \code{mcc}.}
+
+\item{steps}{Integer number of steps to take during epsilon optimization.}
 }
 \value{
 An object of class \code{ad}:

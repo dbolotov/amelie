@@ -128,7 +128,7 @@
 </li>
 <li>Tune <span class="math inline">\(\epsilon\)</span> on cross-validation data set.
 <ol style="list-style-type: lower-alpha">
-<li>Pick starting value for <span class="math inline">\(\epsilon\)</span>.</li>
+<li>Pick starting value for <span class="math inline">\(\epsilon\)</span>; <span class="math inline">\(min(p(x)_{train})\)</span> is used here.</li>
 <li>Calculate <span class="math inline">\(p(x)_{cv}\)</span> for each row in CV set using <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> from <code>step 2</code>.</li>
 <li>For each row <span class="math inline">\(i\)</span> in CV set, predict <span class="math inline">\(y = 1\)</span> if <span class="math inline">\(p(x_i) &lt; \epsilon\)</span> (anomaly), else predict <span class="math inline">\(y=0\)</span>.</li>
 <li>Evaluate prediction accuracy on CV set using a score (e.g., f1).</li>
@@ -148,16 +148,13 @@
 </li>
 </ol>
 </div>
-<div id="extending-the-univariate-anomaly-detection-algorithm" class="section level3">
+<div id="multivariate-anomaly-detection-algorithm" class="section level3">
 <h3 class="hasAnchor">
-<a href="#extending-the-univariate-anomaly-detection-algorithm" class="anchor"></a>Extending the univariate anomaly detection algorithm</h3>
-<p>It is possible to extend the above algorithm by using multivariate version of the normal distribution. In this case, the features are not assumed to be independent, and <span class="math inline">\(p\)</span> is not a product of independent densities.</p>
-<div id="multivariate-normal-distribution" class="section level4">
-<h4 class="hasAnchor">
-<a href="#multivariate-normal-distribution" class="anchor"></a>Multivariate normal distribution</h4>
-<p>For parameters <span class="math inline">\(\mu \in R^n\)</span> and <span class="math inline">\(\Sigma \in R^{n * n}\)</span>, the multivariate probability density function is given by:</p>
-<p><span class="math display">\[p(x; \mu, \Sigma) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}e^{(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))}\]</span></p>
-</div>
+<a href="#multivariate-anomaly-detection-algorithm" class="anchor"></a>Multivariate anomaly detection algorithm</h3>
+<p>It is possible to extend the above algorithm by using the multivariate version of the normal distribution. In this case, the features are not assumed to be independent, and <span class="math inline">\(p\)</span> is not a product of independent densities.</p>
+<p>For parameters <span class="math inline">\(\mu \in R^n\)</span> (vector of means) and <span class="math inline">\(\Sigma \in R^{n * n}\)</span> (covariance matrix), the multivariate probability density function is given by:</p>
+<p><span class="math display">\[p(x; \mu, \Sigma) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}e^{(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))},\]</span> Where <span class="math inline">\(|\Sigma|\)</span> is the determinant of <span class="math inline">\(\Sigma\)</span>.</p>
+<p>Unlike the univariate version, the multivariate pdf approach automatically captures correlations between features. However, the latter approach is computationally more expensive due to having to compute the inverse of <span class="math inline">\(\Sigma\)</span>. The univariate algorithm works even when the training set size is small. For the multivariate version, <span class="math inline">\(\Sigma\)</span> is non-invertible if the number of observations is smaller than the number of features or the data contains features that are linearly dependent on others.</p>
 </div>
 <div id="examples" class="section level3">
 <h3 class="hasAnchor">

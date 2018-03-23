@@ -109,7 +109,8 @@
 <span class='fu'>ad</span>(<span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>na.action</span> <span class='kw'>=</span> <span class='no'>na.omit</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>ad</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>univariate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>score</span> <span class='kw'>=</span> <span class='st'>"f1"</span>, <span class='no'>...</span>)
+<span class='fu'>ad</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>univariate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>score</span> <span class='kw'>=</span> <span class='st'>"f1"</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='no'>...</span>)
 
 <span class='co'># S3 method for ad</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -152,6 +153,10 @@ assumed to be anomalous.</p></td>
       <th>score</th>
       <td><p>String indicating which score to use in optimization:
 <code>f1</code> (default) or <code>mcc</code>.</p></td>
+    </tr>
+    <tr>
+      <th>steps</th>
+      <td><p>Integer number of steps to take during epsilon optimization.</p></td>
     </tr>
     </table>
     

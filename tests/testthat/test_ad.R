@@ -35,11 +35,13 @@ test_that("fit is the same for formula and matrix data",{
 
 test_that("fit object contains required attributes", {
   expect_equal(attributes(df_fit_0)$names,c("call", "univariate", "score",
-                                          "epsilon", "train_x_mean",
-                                          "train_x_sd", "val_score", "terms"))
+                                            "steps", "epsilon",
+                                            "train_x_mean", "train_x_sd",
+                                            "val_score", "terms"))
   expect_equal(attributes(mat_fit_0)$names,c("call", "univariate", "score",
-                                           "epsilon", "train_x_mean",
-                                           "train_x_sd", "val_score"))
+                                             "steps", "epsilon",
+                                             "train_x_mean",
+                                             "train_x_sd", "val_score"))
 })
 
 

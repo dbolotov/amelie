@@ -34,10 +34,12 @@
 
 .mcc <- function(y_hat, y) {
   # assumes that "1" is the positive result
-  tp <- sum((y_hat==1) & (y==1))
-  fp <- sum((y_hat==1) & (y==0))
-  fn <- sum((y_hat==0) & (y==1))
-  tn <- sum((y_hat==0) & (y==0))
+
+  # convert to double to avoid integer overflow
+  tp <- as.double(sum((y_hat==1) & (y==1)))
+  fp <- as.double(sum((y_hat==1) & (y==0)))
+  fn <- as.double(sum((y_hat==0) & (y==1)))
+  tn <- as.double(sum((y_hat==0) & (y==0)))
 
   numer <- tp*tn - fp*fn
   denom <- sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))

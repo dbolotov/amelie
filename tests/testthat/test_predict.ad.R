@@ -50,3 +50,13 @@ test_that("prediction on default object errors when data has missing values", {
   expect_error(predict(mat_fit, newdata = dframe_test, type = 'class'),
                'newdata contains missing values.', fixed = TRUE)
 })
+
+test_that("multivariate version is used for multivar algorithm", {
+  x1_0 <- c(1,2,3,4)
+  x2_0 <- c(0.4,0.3,0.2,0.1)
+  x_0 <- do.call(cbind,list(x1_0,x2_0))
+  y_0 <- c(0,0,0,1)
+  set.seed(134)
+  mat_fit <- ad(x = x_0, y = y_0, univariate = FALSE)
+  expect_equal(predict(mat_fit, newdata = x_0, type = 'class'),c(0,0,0,1))
+})

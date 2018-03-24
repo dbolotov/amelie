@@ -121,7 +121,8 @@
     # train_y <- rep(0,length(1:split_point))
 
     val_x <- neg_x[(split_point+1):(dim(neg_x)[1]),]
-    val_y <- c(rep(0,dim(val_x)[1]),
+    val_x_nrows <- if (is.null(dim(val_x)[1])) 1 else dim(val_x)[1]
+    val_y <- c(rep(0,val_x_nrows),
                rep(1,length(pos_idx))) #combine negative and positive observations
     val_x <- unname(rbind(val_x,pos_x))
 

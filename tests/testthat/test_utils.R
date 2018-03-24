@@ -109,15 +109,29 @@ test_that("non-random data split works correctly", {
 })
 
 
-test_that("fail when x and y are of different lengths", {
-  y <- c(0,0,0)
-  expect_error(ad(x = x, y = y),
-               'x and y must have the same number of observations',
+test_that(".check_data fails when x and y are of different lengths", {
+  y_1 <- c(0,0,0)
+  expect_error(ad(x = x, y = y_1),
+               'x and y must have the same number of observations.',
+               fixed = TRUE)
+})
+
+test_that(".check_data fails matrix input contains NA", {
+  x1_0 <- c(NA,3,4,5,6,7,8,9,10)
+  x2_0 <- c(22,33,44,55,66,77,88,99,110)
+  x_0 <- do.call(cbind,list(x1_0,x2_0))
+  expect_error(ad(x = x_0, y = y),
+               'NAs currently not supported for matrix input.',
                fixed = TRUE)
 })
 
 
+test_that(".check_data passes when data frame input contains NA", {
+  x1_0 <- c(NA,3,4,5,6,7,8,9,10)
+  x2_0 <- c(22,33,44,55,66,77,NA,99,110)
+  x_0 <- do.call(cbind,list(x1_0,x2_0))
+  dframe_0 <- data.frame(x_0,y)
+  names(dframe_0) <- c("x1_0","x2_0","y")
+  expect_silent(ad(y ~ x1_0 + x2_0, dframe_0))
+})
 
-# test_that("epsilon optimization works correctly", {
-#   expect_equal(0,0)
-# })

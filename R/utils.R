@@ -179,6 +179,6 @@
 
   # check that x and y don't contain NA
   if ((any(is.na(x))) | (any(is.na(y)))) {
-    stop("NAs currently not supported.")
+    stop("NAs currently not supported for matrix input.")
   }
 }

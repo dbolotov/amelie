@@ -131,17 +131,13 @@
     # val_y <- val_y[val_shuf_idx]
   }
 
-  else if (random==FALSE) {
+  else {
     # non-randomly split data into training and validation sets, regardless of class
     split_point <- floor((length(y))*p)
 
     train_x <- x[1:split_point,]
     val_x <- x[-c(1:split_point),]
     val_y <- y[-c(1:split_point)]
-  }
-
-  else {
-    stop("random must be logical TRUE or FALSE")
   }
 
   ret <- list(train_x,val_x,val_y)

@@ -10,14 +10,14 @@
   return(probs)
 }
 
-.multivariate_pdf <- function(x,x_mean,x_sd) {
+.multivariate_pdf <- function(x,x_mean,x_cov) {
   probs <- rep(NA,NROW(x))
   n_means <- length(x_mean)
-  x_sd_2 <- diag(x_sd^2)
+  # x_sd_2 <- diag(x_sd^2)
 
   x_no_m <- as.matrix(sweep(x,2,x_mean))
 
-  probs <- ((2*pi)^(-n_means/2)) * ((det(x_sd_2))^(-0.5)) * exp(-0.5 * rowSums((x_no_m %*% solve(x_sd_2)) * x_no_m))
+  probs <- ((2*pi)^(-n_means/2)) * ((det(x_cov))^(-0.5)) * exp(-0.5 * rowSums((x_no_m %*% solve(x_cov)) * x_no_m))
   return(probs)
 }
 

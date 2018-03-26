@@ -18,6 +18,8 @@
 #' dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
 #' pdfunc(dmat,TRUE)
 #'
+#'#'@importFrom stats cov
+
 #' @rdname pdfunc
 #' @export
 pdfunc <- function(x, univariate = TRUE) {
@@ -27,11 +29,12 @@ pdfunc <- function(x, univariate = TRUE) {
 
   #compute mean and sd
   x_mean <- .mean2(x)
-  x_sd <- .sd2(x)
 
   if (univariate == TRUE) {
+    x_sd <- .sd2(x)
     .univariate_pdf(x,x_mean,x_sd)
   } else {
+    x_sd <- cov(x)
     .multivariate_pdf(x,x_mean,x_sd)
   }
 }

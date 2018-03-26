@@ -145,13 +145,13 @@ test_that("ad matches expected values for univar", {
 
 test_that("ad matches expected values for multivar", {
   expect_equal(df_fit_1$train_x_mean,c(0.925, 0.350))
-  expect_equal(df_fit_1$train_x_sd,c(0.1500000000, 0.4725815626))
-  expect_equal(df_fit_1$epsilon,1.805404e-08)
+  expect_equal(as.vector(df_fit_1$train_x_sd),c(0.0225000, -0.0650000, -0.0650000, 0.2233333333))
+  expect_equal(df_fit_1$epsilon,3.861272e-31)
   expect_equal(df_fit_1$val_score,0.8)
 
   expect_equal(mat_fit_1$train_x_mean,c(0.925, 0.350))
-  expect_equal(mat_fit_1$train_x_sd,c(0.1500000000, 0.4725815626))
-  expect_equal(mat_fit_1$epsilon,1.805404e-08)
+  expect_equal(as.vector(df_fit_1$train_x_sd),c(0.0225000, -0.0650000, -0.0650000, 0.2233333333))
+  expect_equal(mat_fit_1$epsilon,3.861272e-31)
   expect_equal(mat_fit_1$val_score,0.8)
 })
 

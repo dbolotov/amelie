@@ -56,21 +56,23 @@ test_that("univariate pdf is calculated correctly 2", {
 })
 
 test_that("multivariate pdf is calculated correctly 1 ", {
-  dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
-  x_mean <- c(0,0,0,0)
-  x_sd <- c(1,1,1,1)
+  dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=4)
+  x_mean <- c(0.1,0.2)
+  x_sd <- matrix(c(1,0,0,1),nrow=2)
   expect_equal(.multivariate_pdf(dmat,x_mean,x_sd),
-               c(2.565983e-07, 1.035191e-04), tolerance = 0.00002)
+               c(0.0004699534, 0.0021061849, 0.0011558988,
+                 0.1040506929), tolerance = 0.00002)
 
 })
 
 
 test_that("multivariate pdf is calculated correctly 2", {
-  dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
+  dmat <- matrix(c(3,1,3,1,2,3,-1,0,1,4),nrow=5)
   x_mean <- .mean2(dmat)
-  x_sd <- .sd2(dmat)
+  x_sd <- cov(dmat)
   expect_equal(.multivariate_pdf(dmat,x_mean,x_sd),
-               c(0.009318495, 0.009318495), tolerance = 0.00002)
+               c(0.04533205, 0.03469015, 0.02690400,
+                 0.04912076, 0.03332547), tolerance = 0.00002)
 
 })
 

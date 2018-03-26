@@ -29,4 +29,5 @@ Standard deviations are computed using \code{sd}, where denominator
 dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
 pdfunc(dmat,TRUE)
 
+#'@importFrom stats cov
 }

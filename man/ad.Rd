@@ -45,8 +45,8 @@ An object of class \code{ad}:
   \item{univariate}{Logical indicating which pdf was computed.}
   \item{score}{The score that was used for optimization.}
   \item{epsilon}{The threshold value.}
-  \item{train_x_mean}{Means of features in the training set.}
-  \item{train_x_sd}{Standard deviations of features in the training set.}
+  \item{train_mean}{Means of features in the training set.}
+  \item{train_sd}{Standard deviations of features in the training set.}
   \item{val_score}{The score obtained on the validation data set.
   0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient}
 }

@@ -19,8 +19,8 @@
 #'   \item{univariate}{Logical indicating which pdf was computed.}
 #'   \item{score}{The score that was used for optimization.}
 #'   \item{epsilon}{The threshold value.}
-#'   \item{train_x_mean}{Means of features in the training set.}
-#'   \item{train_x_sd}{Standard deviations of features in the training set.}
+#'   \item{train_mean}{Means of features in the training set.}
+#'   \item{train_sd}{Standard deviations of features in the training set.}
 #'   \item{val_score}{The score obtained on the validation data set.
 #'   0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient}
 #'
@@ -135,21 +135,21 @@ ad.default <- function(x, y, univariate = TRUE,
 
 
   # compute mean and variance of training set
-  train_x_mean <- .mean2(train_x)
+  train_mean <- .mean2(train_x)
 
   # compute product of probabilities on training set
   if (univariate == TRUE) {
-    train_x_sd <- .sd2(train_x)
+    train_sd <- .sd2(train_x)
 
-    train_x_probs_prod <- .univariate_pdf(train_x,train_x_mean,train_x_sd)
-    val_x_probs_prod <- .univariate_pdf(val_x,train_x_mean,train_x_sd)
+    train_x_probs_prod <- .univariate_pdf(train_x,train_mean,train_sd)
+    val_x_probs_prod <- .univariate_pdf(val_x,train_mean,train_sd)
   } else {
-    # train_x_sd <- .sd2(train_x)
+    # train_sd <- .sd2(train_x)
 
-    train_x_sd <- cov(train_x)
+    train_sd <- cov(train_x)
 
-    train_x_probs_prod <- .multivariate_pdf(train_x,train_x_mean,train_x_sd)
-    val_x_probs_prod <- .multivariate_pdf(val_x,train_x_mean,train_x_sd)
+    train_x_probs_prod <- .multivariate_pdf(train_x,train_mean,train_sd)
+    val_x_probs_prod <- .multivariate_pdf(val_x,train_mean,train_sd)
   }
   # optimize epsilon using validation set
   epsilon <- .op_epsilon(val_x_probs_prod, val_y, score, steps)
@@ -168,8 +168,8 @@ ad.default <- function(x, y, univariate = TRUE,
                      score = score,
                      steps = steps,
                      epsilon = epsilon,
-                     train_x_mean = train_x_mean,
-                     train_x_sd = train_x_sd,
+                     train_mean = train_mean,
+                     train_sd = train_sd,
                      # val_predictions = val_predictions,
                      val_score = val_score)
   class(return_obj) <- "ad"

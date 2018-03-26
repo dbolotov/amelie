@@ -51,15 +51,15 @@ predict.ad <- function(object, newdata, type = 'class', na.action = na.pass, ...
   }
 
   epsilon <- object$epsilon
-  train_x_mean <- object$train_x_mean
-  train_x_sd <- object$train_x_sd
+  train_mean <- object$train_mean
+  train_sd <- object$train_sd
 
 
   #prediction
   if (object$univariate == TRUE) {
-    newdata_probs_prod <- .univariate_pdf(x,train_x_mean,train_x_sd)
+    newdata_probs_prod <- .univariate_pdf(x,train_mean,train_sd)
   } else {
-    newdata_probs_prod <- .multivariate_pdf(x,train_x_mean,train_x_sd)
+    newdata_probs_prod <- .multivariate_pdf(x,train_mean,train_sd)
   }
   if (type == 'class') {
     predictions <- as.numeric(newdata_probs_prod < epsilon)

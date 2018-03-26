@@ -155,3 +155,15 @@ test_that("ad matches expected values for multivar", {
   expect_equal(mat_fit_1$val_score,0.8)
 })
 
+
+test_that("ad fails when variance = 0 for a feature", {
+  x1 <- c(0,1,2,3)
+  x2 <- c(1,1,1,1)
+  x <- do.call(cbind,list(x1,x2))
+  y <- c(0,0,0,1)
+  dframe <- data.frame(x,y)
+  set.seed(321)
+  expect_error(ad(y ~ x1 + x2, dframe),"Feature with 0 variance found in training set. This results in Inf pdf values.",
+               fixed = TRUE)
+})
+

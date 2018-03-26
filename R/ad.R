@@ -142,12 +142,17 @@ ad.default <- function(x, y, univariate = TRUE,
   if (univariate == TRUE) {
     train_var <- .var2(train_x)
 
-    train_x_probs_prod <- .univariate_pdf(train_x,train_mean,train_var)
+    if (any(train_var == 0)) {
+      stop("Feature with 0 variance found in training set. This results in Inf pdf values.")
+    }
+
+
+    # train_x_probs_prod <- .univariate_pdf(train_x,train_mean,train_var) #is this calculation necessary?
     val_x_probs_prod <- .univariate_pdf(val_x,train_mean,train_var)
   } else {
     train_var <- cov(train_x)
 
-    train_x_probs_prod <- .multivariate_pdf(train_x,train_mean,train_var)
+    # train_x_probs_prod <- .multivariate_pdf(train_x,train_mean,train_var)
     val_x_probs_prod <- .multivariate_pdf(val_x,train_mean,train_var)
   }
   # optimize epsilon using validation set

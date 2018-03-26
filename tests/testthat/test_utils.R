@@ -31,11 +31,11 @@ test_that(".mean2 is calculated correctly", {
 })
 
 
-test_that(".sd2 is calculated correctly", {
+test_that(".var2 is calculated correctly", {
   dmat <- matrix(c(1,2,1,4,3,5,2,1,3,2,1.1,2.2),nrow=4)
-  expect_equal(.sd2(dmat), c(1.4142136, 1.7078251, 0.7804913), tolerance = 0.00002)
-  expect_equal(.sd2(dmat[1:2,1:2]), c(0.7071068, 1.4142136), tolerance = 0.00002)
-  expect_null(names(.sd2(dmat)))
+  expect_equal(.var2(dmat), c(2.0000000000, 2.9166666667, 0.6091666667))
+  expect_equal(.var2(dmat[1:2,1:2]), c(0.5, 2.0))
+  expect_null(names(.var2(dmat)))
 })
 
 
@@ -49,7 +49,7 @@ test_that("univariate pdf is calculated correctly 1", {
 test_that("univariate pdf is calculated correctly 2", {
   dmat <- matrix(c(3,1,3,1,2,3,-1,0),nrow=2)
   x_mean <- .mean2(dmat)
-  x_sd <- .sd2(dmat)
+  x_sd <- .var2(dmat)
   expect_equal(.univariate_pdf(dmat,x_mean,x_sd),
                c(0.009318495, 0.009318495), tolerance = 0.00002)
 

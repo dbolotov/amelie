@@ -1,8 +1,9 @@
 #utility functions
 
-#'@importFrom stats dnorm na.omit model.extract model.matrix
+#'@importFrom stats dnorm na.omit model.extract model.matrix var
 
-.univariate_pdf <- function(x,x_mean,x_sd) {
+.univariate_pdf <- function(x,x_mean,x_var) {
+  x_sd <- sqrt(x_var)
   probs <- rep(NA,NROW(x))
   for (r in 1:NROW(x)) {
     probs[r] <- prod(dnorm(as.numeric(x[r,]), mean = x_mean, sd = x_sd, log = FALSE))
@@ -150,9 +151,10 @@
   return(unname(apply(x,2,mean)))
 }
 
-.sd2 <- function(x) {
+.var2 <- function(x) {
   # using sample standard deviation
-  return(unname(apply(x,2,sd)))
+  # return(unname(apply(x,2,sd)))
+  return(unname(apply(x,2,var)))
 }
 
 .check_data <- function(x, y) {

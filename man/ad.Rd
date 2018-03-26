@@ -46,7 +46,8 @@ An object of class \code{ad}:
   \item{score}{The score that was used for optimization.}
   \item{epsilon}{The threshold value.}
   \item{train_mean}{Means of features in the training set.}
-  \item{train_sd}{Standard deviations of features in the training set.}
+  \item{train_var}{Variances of features in the training set. If
+  \code{univariate=FALSE}}, holds the covariance matrix for the features.
   \item{val_score}{The score obtained on the validation data set.
   0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient}
 }
@@ -64,8 +65,8 @@ case, anomaly).
 The threshold \code{epsilon} is optimized using the either the Matthews
 correlation coefficient or F1 score.
 
-Standard deviations are computed using \code{sd}, where denominator
-\code{n-1} is used (sample standard deviation).
+Variance and covariance are computed using \code{var} and \code{cov}, where
+denominator \code{n-1} is used.
 
 Algorithm details are described in the Introduction vignette.
 

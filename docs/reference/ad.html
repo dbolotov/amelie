@@ -167,8 +167,9 @@ assumed to be anomalous.</p></td>
   <dt>univariate</dt><dd><p>Logical indicating which pdf was computed.</p></dd>
   <dt>score</dt><dd><p>The score that was used for optimization.</p></dd>
   <dt>epsilon</dt><dd><p>The threshold value.</p></dd>
-  <dt>train_x_mean</dt><dd><p>Means of features in the training set.</p></dd>
-  <dt>train_x_sd</dt><dd><p>Standard deviations of features in the training set.</p></dd>
+  <dt>train_mean</dt><dd><p>Means of features in the training set.</p></dd>
+  <dt>train_var</dt><dd><p>Variances of features in the training set. If
+  <code>univariate=FALSE</code></p></dd>, holds the covariance matrix for the features.
   <dt>val_score</dt><dd><p>The score obtained on the validation data set.
   0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient</p></dd>
 
@@ -182,8 +183,8 @@ on values of <code>0</code> (negative case, no anomaly) or <code>1</code> (posit
 case, anomaly).</p>
 <p>The threshold <code>epsilon</code> is optimized using the either the Matthews
 correlation coefficient or F1 score.</p>
-<p>Standard deviations are computed using <code>sd</code>, where denominator
-<code>n-1</code> is used (sample standard deviation).</p>
+<p>Variance and covariance are computed using <code>var</code> and <code>cov</code>, where
+denominator <code>n-1</code> is used.</p>
 <p>Algorithm details are described in the Introduction vignette.</p>
 <p>The package follows the anomaly detection approach in Andrew Ng's course on
 machine learning.</p>

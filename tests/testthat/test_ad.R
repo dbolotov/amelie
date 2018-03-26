@@ -28,7 +28,7 @@ test_that("class of fit object excludes formula when using default notation",{
 test_that("fit is the same for formula and matrix data",{
   expect_identical(df_fit_0$epsilon,mat_fit_0$epsilon)
   expect_identical(df_fit_0$train_mean,mat_fit_0$train_mean)
-  expect_identical(df_fit_0$train_sd,mat_fit_0$train_sd)
+  expect_identical(df_fit_0$train_var,mat_fit_0$train_var)
   expect_identical(df_fit_0$train_predictions,mat_fit_0$train_predictions)
   expect_false(identical(df_fit_0$call,mat_fit_0$call))
 })
@@ -37,12 +37,12 @@ test_that("fit is the same for formula and matrix data",{
 test_that("fit object contains required attributes", {
   expect_equal(attributes(df_fit_0)$names,c("call", "univariate", "score",
                                             "steps", "epsilon",
-                                            "train_mean", "train_sd",
+                                            "train_mean", "train_var",
                                             "val_score", "terms"))
   expect_equal(attributes(mat_fit_0)$names,c("call", "univariate", "score",
                                              "steps", "epsilon",
                                              "train_mean",
-                                             "train_sd", "val_score"))
+                                             "train_var", "val_score"))
 })
 
 
@@ -133,24 +133,24 @@ test_that("fail when univariate is not logical", {
 
 test_that("ad matches expected values for univar", {
   expect_equal(df_fit_0$train_mean,c(0.925, 0.350))
-  expect_equal(df_fit_0$train_sd,c(0.1500000000, 0.4725815626))
+  expect_equal(df_fit_0$train_var,c(0.0225000000, 0.2233333333))
   expect_equal(df_fit_0$epsilon,1.805404e-08)
   expect_equal(df_fit_0$val_score,0.8)
 
   expect_equal(mat_fit_0$train_mean,c(0.925, 0.350))
-  expect_equal(mat_fit_0$train_sd,c(0.1500000000, 0.4725815626))
+  expect_equal(mat_fit_0$train_var,c(0.0225000000, 0.2233333333))
   expect_equal(mat_fit_0$epsilon,1.805404e-08)
   expect_equal(mat_fit_0$val_score,0.8)
 })
 
 test_that("ad matches expected values for multivar", {
   expect_equal(df_fit_1$train_mean,c(0.925, 0.350))
-  expect_equal(as.vector(df_fit_1$train_sd),c(0.0225000, -0.0650000, -0.0650000, 0.2233333333))
+  expect_equal(as.vector(df_fit_1$train_var),c(0.0225000, -0.0650000, -0.0650000, 0.2233333333))
   expect_equal(df_fit_1$epsilon,3.861272e-31)
   expect_equal(df_fit_1$val_score,0.8)
 
   expect_equal(mat_fit_1$train_mean,c(0.925, 0.350))
-  expect_equal(as.vector(df_fit_1$train_sd),c(0.0225000, -0.0650000, -0.0650000, 0.2233333333))
+  expect_equal(as.vector(df_fit_1$train_var),c(0.0225000, -0.0650000, -0.0650000, 0.2233333333))
   expect_equal(mat_fit_1$epsilon,3.861272e-31)
   expect_equal(mat_fit_1$val_score,0.8)
 })

@@ -20,7 +20,8 @@
 #'   \item{score}{The score that was used for optimization.}
 #'   \item{epsilon}{The threshold value.}
 #'   \item{train_mean}{Means of features in the training set.}
-#'   \item{train_sd}{Standard deviations of features in the training set.}
+#'   \item{train_var}{Variances of features in the training set. If
+#'   \code{univariate=FALSE}}, holds the covariance matrix for the features.
 #'   \item{val_score}{The score obtained on the validation data set.
 #'   0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient}
 #'
@@ -36,8 +37,8 @@
 #' The threshold \code{epsilon} is optimized using the either the Matthews
 #' correlation coefficient or F1 score.
 #'
-#' Standard deviations are computed using \code{sd}, where denominator
-#' \code{n-1} is used (sample standard deviation).
+#' Variance and covariance are computed using \code{var} and \code{cov}, where
+#' denominator \code{n-1} is used.
 #'
 #' Algorithm details are described in the Introduction vignette.
 #'
@@ -139,17 +140,15 @@ ad.default <- function(x, y, univariate = TRUE,
 
   # compute product of probabilities on training set
   if (univariate == TRUE) {
-    train_sd <- .sd2(train_x)
+    train_var <- .var2(train_x)
 
-    train_x_probs_prod <- .univariate_pdf(train_x,train_mean,train_sd)
-    val_x_probs_prod <- .univariate_pdf(val_x,train_mean,train_sd)
+    train_x_probs_prod <- .univariate_pdf(train_x,train_mean,train_var)
+    val_x_probs_prod <- .univariate_pdf(val_x,train_mean,train_var)
   } else {
-    # train_sd <- .sd2(train_x)
+    train_var <- cov(train_x)
 
-    train_sd <- cov(train_x)
-
-    train_x_probs_prod <- .multivariate_pdf(train_x,train_mean,train_sd)
-    val_x_probs_prod <- .multivariate_pdf(val_x,train_mean,train_sd)
+    train_x_probs_prod <- .multivariate_pdf(train_x,train_mean,train_var)
+    val_x_probs_prod <- .multivariate_pdf(val_x,train_mean,train_var)
   }
   # optimize epsilon using validation set
   epsilon <- .op_epsilon(val_x_probs_prod, val_y, score, steps)
@@ -169,7 +168,7 @@ ad.default <- function(x, y, univariate = TRUE,
                      steps = steps,
                      epsilon = epsilon,
                      train_mean = train_mean,
-                     train_sd = train_sd,
+                     train_var = train_var,
                      # val_predictions = val_predictions,
                      val_score = val_score)
   class(return_obj) <- "ad"

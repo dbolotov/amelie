@@ -136,13 +136,16 @@ ad.default <- function(x, y, univariate = TRUE,
 
   # compute mean and variance of training set
   train_x_mean <- .mean2(train_x)
-  train_x_sd <- .sd2(train_x)
 
   # compute product of probabilities on training set
   if (univariate == TRUE) {
+    train_x_sd <- .sd2(train_x)
+
     train_x_probs_prod <- .univariate_pdf(train_x,train_x_mean,train_x_sd)
     val_x_probs_prod <- .univariate_pdf(val_x,train_x_mean,train_x_sd)
   } else {
+    train_x_sd <- .sd2(train_x)
+
     train_x_probs_prod <- .multivariate_pdf(train_x,train_x_mean,train_x_sd)
     val_x_probs_prod <- .multivariate_pdf(val_x,train_x_mean,train_x_sd)
   }

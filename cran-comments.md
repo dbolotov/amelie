@@ -1,7 +1,7 @@
 ## Test environments
-R version 3.4.4 (2018-03-15)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 7 x64 (build 7601) Service Pack 1
+* Local Windows 7 x64 (build 7601) Service Pack 1 install, R 3.4.4
+* Ubuntu 14.04.5 LTS (on travis-ci), R 3.4.4
+* win-builder (devel and release)
 
 ## R CMD check results
 There were no ERRORs.

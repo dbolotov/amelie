@@ -6,7 +6,5 @@ Running under: Windows 7 x64 (build 7601) Service Pack 1
 ## R CMD check results
 There were no ERRORs.
 
-There was 1 WARNING, despite not showing up in the summary above:
-
- WARNING
+There was 1 WARNING:
 'qpdf' is needed for checks on size reduction of PDFs

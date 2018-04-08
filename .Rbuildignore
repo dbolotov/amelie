@@ -3,8 +3,12 @@
 
 ^cran-comments\.md$
 ^NEWS\.md$
-^\.travis\.yml$
 ^README\.md$
 ^NOTES\.md$
 
 ^README\.Rmd$
+
+^docs$
+^_pkgdown\.yaml$
+^codecov\.yml$
+^\.travis\.yml$

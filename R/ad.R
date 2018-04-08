@@ -9,7 +9,7 @@
 #' @param univariate Logical indicating whether the univariate pdf should be used.
 #' @param score String indicating which score to use in optimization:
 #' \code{f1} (default) or \code{mcc}.
-#' @param steps Integer number of steps to take during epsilon optimization.
+#' @param steps Integer number of steps to take during epsilon optimization, default 1e3.
 #' @param na.action A function specifying the action to be taken if NAs are
 #' found.
 #' @param ... Optional parameters to be passed to ad.default.
@@ -20,8 +20,7 @@
 #'   \item{score}{The score that was used for optimization.}
 #'   \item{epsilon}{The threshold value.}
 #'   \item{train_mean}{Means of features in the training set.}
-#'   \item{train_var}{Variances of features in the training set. If
-#'   \code{univariate=FALSE}}, holds the covariance matrix for the features.
+#'   \item{train_var}{Variances of features in the training set. If \code{univariate=FALSE}}, holds the covariance matrix for the features.
 #'   \item{val_score}{The score obtained on the validation data set.
 #'   0 to 1 for F1 score, -1 to 1 for Matthews correlation coefficient}
 #'

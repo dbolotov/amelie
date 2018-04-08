@@ -37,7 +37,7 @@ assumed to be anomalous.}
 \item{score}{String indicating which score to use in optimization:
 \code{f1} (default) or \code{mcc}.}
 
-\item{steps}{Integer number of steps to take during epsilon optimization.}
+\item{steps}{Integer number of steps to take during epsilon optimization, default 1e3.}
 }
 \value{
 An object of class \code{ad}:
@@ -46,8 +46,7 @@ An object of class \code{ad}:
   \item{score}{The score that was used for optimization.}
   \item{epsilon}{The threshold value.}
   \item{train_mean}{Means of features in the training set.}
-  \item{train_var}{Variances of features in the training set. If
-  \code{univariate=FALSE}}, holds the covariance matrix for the features.
+  \item{train_var}{Variances of features in the training set. If \code{univariate=FALSE}}, holds the covariance matrix for the features.
   \item{val_score}{The score obtained on the validation data set.
   0 to 1 for F1 score, -1 to 1 for Matthews correlation coefficient}
 }

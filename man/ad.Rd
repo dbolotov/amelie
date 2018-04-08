@@ -49,7 +49,7 @@ An object of class \code{ad}:
   \item{train_var}{Variances of features in the training set. If
   \code{univariate=FALSE}}, holds the covariance matrix for the features.
   \item{val_score}{The score obtained on the validation data set.
-  0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient}
+  0 to 1 for F1 score, -1 to 1 for Matthews correlation coefficient}
 }
 \description{
 ad: anomaly detection with normal probability density functions.

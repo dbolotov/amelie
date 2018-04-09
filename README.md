@@ -7,9 +7,9 @@ About
 
 `amelie` implements anomaly detection with maximum likelihood estimates and normal probability density functions. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
 
-Current CRAN version: [0.1.0](https://cran.r-project.org/web/packages/amelie/index.html)
+Current CRAN version: [0.2.0](https://cran.r-project.org/web/packages/amelie/index.html)
 
-Development version (this repository): 0.2.0
+Development version (this repository): 0.3.0
 
 Installation
 ------------

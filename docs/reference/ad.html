@@ -156,7 +156,7 @@ assumed to be anomalous.</p></td>
     </tr>
     <tr>
       <th>steps</th>
-      <td><p>Integer number of steps to take during epsilon optimization.</p></td>
+      <td><p>Integer number of steps to take during epsilon optimization, default 1e3.</p></td>
     </tr>
     </table>
     
@@ -168,10 +168,9 @@ assumed to be anomalous.</p></td>
   <dt>score</dt><dd><p>The score that was used for optimization.</p></dd>
   <dt>epsilon</dt><dd><p>The threshold value.</p></dd>
   <dt>train_mean</dt><dd><p>Means of features in the training set.</p></dd>
-  <dt>train_var</dt><dd><p>Variances of features in the training set. If
-  <code>univariate=FALSE</code></p></dd>, holds the covariance matrix for the features.
+  <dt>train_var</dt><dd><p>Variances of features in the training set. If <code>univariate=FALSE</code></p></dd>, holds the covariance matrix for the features.
   <dt>val_score</dt><dd><p>The score obtained on the validation data set.
-  0 to 1 for F1 score, -1 to 1 for Mathews correlation coefficient</p></dd>
+  0 to 1 for F1 score, -1 to 1 for Matthews correlation coefficient</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>

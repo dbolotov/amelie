@@ -23,7 +23,7 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 
 ## About
 
-`amelie` implements anomaly detection with maximum likelihood estimates and normal probability density functions. The package follows the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
+`amelie` implements anomaly detection with maximum likelihood estimates and normal probability density functions. The package follows and builds on the approach described in Andrew Ng's [course on machine learning](https://www.coursera.org/learn/machine-learning).
 
 Current CRAN version: [0.2.0](https://cran.r-project.org/web/packages/amelie/index.html)
 

@@ -1,12 +1,11 @@
+^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
 ^cran-comments\.md$
 ^README\.md$
 ^NOTES\.md$
-
 ^README\.Rmd$
-
 ^docs$
 ^_pkgdown\.yaml$
 ^codecov\.yml$

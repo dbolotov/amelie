@@ -1,6 +1,6 @@
-# amelie 0.3.0.9000
+# amelie 0.2.1
 
-* TODO
+* Added RNG hotfix as per CRAN instructions, for the upcoming R 3.6 change.
 
 # amelie 0.2.0
 

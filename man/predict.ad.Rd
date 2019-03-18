@@ -4,8 +4,8 @@
 \alias{predict.ad}
 \title{Predict method for ad Objects}
 \usage{
-\method{predict}{ad}(object, newdata, type = "class", na.action = na.pass,
-  ...)
+\method{predict}{ad}(object, newdata, type = "class",
+  na.action = na.pass, ...)
 }
 \arguments{
 \item{object}{An object of class \code{ad}, created by the function \code{ad}.}

@@ -84,6 +84,7 @@ x <- do.call(cbind,list(x1,x2))
 y <- c(0,0,0,0,0,0,0,0,1)
 
 test_that("random data split works correctly 1", {
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(101)
   dat <- .split_data(x, y)
   expect_equal(dat$val_y,c(0,0,1))
@@ -92,6 +93,7 @@ test_that("random data split works correctly 1", {
 })
 
 test_that("random data split works correctly 2", {
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(232)
   dat <- .split_data(x, y, p = 0.5)
   expect_equal(dat$val_y,c(0,0,0,0,1))

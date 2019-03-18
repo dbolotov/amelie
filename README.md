@@ -9,7 +9,7 @@ About
 
 Current CRAN version: [0.2.0](https://cran.r-project.org/web/packages/amelie/index.html)
 
-Development version (this repository): 0.3.0
+Development version (this repository): 0.2.1
 
 Installation
 ------------

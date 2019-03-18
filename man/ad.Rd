@@ -11,8 +11,8 @@ ad(x, ...)
 
 \method{ad}{formula}(formula, data, na.action = na.omit, ...)
 
-\method{ad}{default}(x, y, univariate = TRUE, score = "f1", steps = 1000,
-  ...)
+\method{ad}{default}(x, y, univariate = TRUE, score = "f1",
+  steps = 1000, ...)
 
 \method{print}{ad}(x, ...)
 }
